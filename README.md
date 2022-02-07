@@ -1,4 +1,4 @@
-# ARCHEthic Improvement Proposals (EIPs)
+# ARCHEthic Improvement Proposals (AEIPs)
 
 ARCHEthic Improvement Proposals (AEIPs) describe standards for the ARCHEthic network, including core protocol specifications, client APIs, and any standards. 
 
