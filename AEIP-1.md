@@ -1,11 +1,10 @@
-<pre>
-  AEIP: 1
-  Title: AEIP Purpose and Guidelines
-  Author: Samuel Manzanera <samuel@uniris.io>
-  Comments-Summary: No comments yet.
-  Type: Process
-  Created: 2022-05-16
-</pre>
+---
+AEIP: 1
+Title: AEIP Purpose and Guidelines
+Author: Samuel Manzanera <samuel@uniris.io>
+Type: Process
+Created: 2022-05-16
+---
 
 # What is an AEIP ?
 
@@ -138,18 +137,18 @@ The headers must appear in the following order.
 Headers marked with "*" are optional and are described below. 
 All other headers are required. 
 
-
-<pre>
+```
+  ---
   AEIP: <AEIP number>
   Title: <AEIP title>
-  Author: <list of authors' real names and optionally, email addrs>
-  Status: <Draft | Active | Accepted | Deferred | Rejected |
-           Withdrawn | Final | Replaced>
+  Author: <list of authors real names and optionally, email addrs>
+  Status: <Draft | Review | Active | Final | Replaced>
   Type: <Standards Track | Informational | Process>
-  Category: <Core | Networkin | Interface | AERC>
+  * Category: <Core | Networkin | Interface | AERC>
   Created: <date created on, in ISO 8601 (yyyy-mm-dd) format>
-  Replaced-By: <BIP number>
-</pre>
+  * Replaced-By: <BIP number>
+  ---
+```
     
 The Author header lists the names, and optionally the email addresses of all the authors/owners of the AEIP. 
     The format of the Author header value must be 
