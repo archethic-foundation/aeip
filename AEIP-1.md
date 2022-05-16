@@ -23,10 +23,10 @@ Because the AEIPs are maintained as text files in a versioned repository, their 
 * A Standards Track AEIP describes any change that affects Archethic implementation, such as a change to the network protocol, 
 a change in chain or transaction validity rules, proposed application standards/conventions, or any change or addition that affects the interoperability of applications using Archethic.
 Furthermore, Standards Track EIPs can be broken down into the following categories: 
-- Core: improvements requiring a consensus upgrade, as well as changes that are not necessarily consensus critical but may be relevant to “core dev” discussions.
-- Networking: includes improvements around P2P layer and Supervised Multicast communication, as well as proposed improvements to the binary protocol.
-- Interface: includes improvements around client API/RPC specifications and standards. 
-- AERC: application-level standards and conventions, including standards such as token standards, name registries, URI schemes, library/package formats, and wallet formats.
+  - Core: improvements requiring a consensus upgrade, as well as changes that are not necessarily consensus critical but may be relevant to “core dev” discussions.
+  - Networking: includes improvements around P2P layer and Supervised Multicast communication, as well as proposed improvements to the binary protocol.
+  - Interface: includes improvements around client API/RPC specifications and standards. 
+  - AERC: application-level standards and conventions, including standards such as token standards, name registries, URI schemes, library/package formats, and wallet formats.
 * An Informational AEIP describes a Archethic design issue, or provides general guidelines or information to Archethic community, but does not propose a new feature. 
 Informational AEIP do not necessarily represent a Archethic community consensus or recommendation, so users and implementors are free to ignore Informational AEIPs or follow their advice.
 * A Process AEIP describes a process surrounding Archethic, or proposes a change to (or an event in) a process. Process AEIPs are like Standards Track AEIPs but apply to areas other than the Archethic protocol itself. 
@@ -118,11 +118,11 @@ AEIPs should be written in markdown format.
 Once a AEIP has been accepted, the reference implementation must be completed. 
 When the reference implementation is complete and accepted by the community, the status will be changed to "Final". 
 
-An AEIP can also be assigned status "Deferred". 
 The AEIP author or editor can assign the AEIP this status when no progress is being made on the AEIP. 
 Once an AEIP is deferred, the AEIP editor can re-assign it to draft status.
 
-An AEIP can also be "Rejected". Perhaps after all is said and done it was not a good idea. It is still important to have a record of this fact.
+An AEIP can also be "Rejected". Perhaps after all is said and done it was not a good idea. 
+It is still important to have a record of this fact.
 
 AEIPs can also be replaced by a different AEIP, rendering the original obsolete. 
 This is intended for Informational AEIPs, where version 2 of an API can replace version 1. 
@@ -142,7 +142,7 @@ All other headers are required.
   AEIP: <AEIP number>
   Title: <AEIP title>
   Author: <list of authors real names and optionally, email addrs>
-  Status: <Draft | Review | Active | Final | Replaced>
+  Status: <Draft | Review | Final | Replaced | Active>
   Type: <Standards Track | Informational | Process>
   * Category: <Core | Networkin | Interface | AERC>
   Created: <date created on, in ISO 8601 (yyyy-mm-dd) format>
