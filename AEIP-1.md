@@ -147,7 +147,7 @@ All other headers are required.
   Type: <Standards Track | Informational | Process>
   * Category: <Core | Networkin | Interface | AERC>
   Created: <date created on, in ISO 8601 (yyyy-mm-dd) format>
-  * Replaced-By: <BIP number>
+  * Replaced-By: <AEIP number>
   ---
 ```
     
