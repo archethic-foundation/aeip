@@ -16,6 +16,6 @@ With those document we aim to create standards for Archethic network implementat
 
 | Number | Title | Type | Category | Status |  
 |-|-|-|-|-|
-| 1 |  AEIP Purpose and Guidelines | | Process | Review | 
+| 1 |  AEIP Purpose and Guidelines | | Process | Active | 
 
 
