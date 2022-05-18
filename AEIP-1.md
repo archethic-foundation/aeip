@@ -29,7 +29,6 @@ Furthermore, Standards Track AEIPs can be broken down into the following categor
   - Interface: includes improvements around client API/RPC specifications and standards. 
   - AERC: application-level standards and conventions, including standards such as token standards, name registries, URI schemes, library/package formats, and wallet formats.
 * An Informational AEIP describes an Archethic design issue, or provides general guidelines or information to Archethic community, but does not propose a new feature. 
-Informational AEIP does not necessarily represent an Archethic community consensus or recommendation, so users and implementors are free to ignore Informational AEIPs or follow their advice.
 * A Process AEIP describes a process surrounding Archethic, or proposes a change to (or an event in) a process. Process AEIPs are like Standards Track AEIPs but apply to areas other than the Archethic protocol itself. 
 They may propose an implementation, but not to Archethic's codebase; they often require community consensus; unlike Informational AEIPs, they are more than recommendations, and users are typically not free to ignore them. 
 Examples include procedures, guidelines, changes to the decision-making process, and changes to the tools or environment used in Archethic development. Any meta-AEIP is also considered a Process AEIP.
