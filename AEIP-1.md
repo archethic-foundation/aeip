@@ -3,7 +3,7 @@ AEIP: 1
 Title: AEIP Purpose and Guidelines
 Author: Samuel Manzanera <samuel@uniris.io>
 Type: Process
-Status: Review
+Status: Active
 Created: 2022-05-16
 ---
 
