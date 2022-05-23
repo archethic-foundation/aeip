@@ -66,7 +66,7 @@ It is highly recommended that a single AEIP contain a single key proposal or new
 The more focused the AEIP, the more successful it tends to be. 
 If in doubt, split your AEIP into several well-focused ones. 
 
-Once the idea is well-formalized, the AEIP's author can submit a pull-request to the [AEIP repository](github.com/archethic-foundation/aeip) to propose 
+Once the idea is well-formalized, the AEIP's author can submit a pull-request to the [AEIP repository](https://github.com/archethic-foundation/aeip) to propose 
 its enhancement.
 
 ## Validation
