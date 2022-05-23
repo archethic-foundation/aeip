@@ -2,8 +2,8 @@
 AEIP: 2
 Title: Token standard
 Author: Samuel Manzanera <samuel@uniris.io>
-Type: Informational
-Category: ARC
+Type: Standard Track
+Category: AERC
 Status: Draft
 Created: 2022-05-23
 ---
