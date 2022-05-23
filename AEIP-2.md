@@ -27,7 +27,9 @@ Non financial transactions are huge part of the transactions today and was the h
 # Specification
 
 Archethic relies on UTXO (Unspent Output Transaction) model where a balance is determined by the sum of the amount from the inputs.
+
 Hence Archethic's tokens leverages the same idea to provide fast and cheap asset creation and transfer: a token is just an entry in the UTXO of a given transaction address.
+
 Because we are not leveraging smart contract but pure P2P transfers, the cost of the transaction is really cheap as it's to send native tokens (UCO).
 
 ## Creation
@@ -37,17 +39,17 @@ Archethic's transaction model is built with the capability to handle several kin
 So in order to create a new token, we should:
 - Set the type of the transaction to: "NFT"
 - Insert the properties of the token in the transaction data content section (free zone) in a the following format:
-```json
+```jsonc
 {
-   supply: NB_OF_TOKEN_TO_CREATE,
-   name: "NAME OF MY TOKEN",
-   properties: {
+   "supply": NB_OF_TOKEN_TO_CREATE,
+   "name": "NAME OF MY TOKEN",
+   "properties": {
     [
       {
          "name": "image",
          "value": "BASE64 OF THE IMAGE"
       },
-      ...
+      // ...
     ]
   }
 }
@@ -71,20 +73,17 @@ To achieve this, the `properties` attribute will be used, to determine the numbe
 For example, if we want to create a collection of 3 tokens, which should be unique and transferable seperatly, we can encode the transaction content in that way:
 ```json
 {
-   supply: 3,
-   name: "My NFT",
-   properties: {
+   "supply": 3,
+   "name": "My NFT",
+   "properties": {
      [
-       { name: "image", value: "link of the 1st NFT image"},
-       ...
+       { "name": "image", "value": "link of the 1st NFT image"},
      ],
      [
-       { name: "image", value: "link of the 2nd NFT image"},
-       ...
+       { "name": "image", "value": "link of the 2nd NFT image"},
      ],
      [
-       { name: "image", value: "link of the 3rd NFT image"},
-       ...
+       { "name": "image", "value": "link of the 3rd NFT image"},
      ]
    }
 } 
@@ -93,9 +92,9 @@ For example, if we want to create a collection of 3 tokens, which should be uniq
 During transaction validations, the miner will create the following UTXOs:
 ```json
 [
-   { type: "NFT", address: "address of the transaction", id: 0 }
-   { type: "NFT", address: "address of the transaction", id: 1 }
-   { type: "NFT", address: "address of the transaction", id: 2 }
+   { "type": "NFT", "address": "address of the transaction", "id": 0 }
+   { "type": "NFT", "address": "address of the transaction", "id": 1 }
+   { "type": "NFT", "address": "address of the transaction", "id": 2 }
 ]
 ```
 
@@ -109,12 +108,17 @@ Hence a simple ledger operations as UCO transfer will allow to transfer non nati
 
 ```json
 {
-   data: {
-     ledger: {
-       uco: {},
-       nft: {
-         transfers: [
-           { to: "address of the recipient", from: "address of the nft", id: "utxo id", amount: 1 }
+   "data": {
+     "ledger": {
+       "uco": {},
+       "nft": {
+         "transfers": [
+           { 
+             "to": "address of the recipient", 
+             "from": "address of the nft", 
+             "id": "utxo id", 
+             "amount": 1
+           }
          ]
        }
      }
