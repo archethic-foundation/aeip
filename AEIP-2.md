@@ -10,34 +10,25 @@ Created: 2022-05-23
 
 # Abstract
 
-The following standard defines the specification for the non-native tokens on the Archethic network (also called "NFT" -> Non Financial Transaction)
+The following standard defines the specification for tokens creation and usage in the Archethic network. 
+This specification will define how non-fungible and fungible tokens can be standardized through a unified transaction encoding.
 
 This standard provides the reason and the need of those tokens and also the way to implement and interact with.
 
-# Motivations
-
-Non financial transactions are huge part of the transactions today and was the humanity’s oldest way to exchange good and services. NFTs are units of value whose value exists only between a sender and a receiver.
-
-- a neighbor is lending his drill agains one hour of gardening
-- a country that organizes elections want to offer discount on public services to voters
-- a town want to provide local money to maintain center town life and shops profitability
-- they can be assimilated to ERC20 Tokens on Ethereum Blockchain
-- or in the case of blockchain such as Archethic, each user who make the ecosystem live will be able to obtain vouchers to pay for miners or as a bonus for email storage and thus increase the volicity of the system.
-
 # Specification
 
-Archethic relies on UTXO (Unspent Output Transaction) model where a balance is determined by the sum of the amount from the inputs.
+Archethic relies on UTXO (Unspent Transaction Output) model where a balance is determined by the sum of the amount from the inputs.
 
 Hence Archethic's tokens leverages the same idea to provide fast and cheap asset creation and transfer: a token is just an entry in the UTXO of a given transaction address.
 
-Because we are not leveraging smart contract but pure P2P transfers, the cost of the transaction is really cheap as it's to send native tokens (UCO).
+Because we are not leveraging smart contract but pure P2P transfers, the cost of the transaction is really cheap like to send native tokens (UCO).
 
 ## Creation
 
 Archethic's transaction model is built with the capability to handle several kind of use cases by its own nature with many components: ledger operations, content hosting, code execution, encryption and autorisations.
 
 So in order to create a new token, we should:
-- Set the type of the transaction to: "NFT"
+- Set the type of the transaction to: "TOKEN"
 - Insert the properties of the token in the transaction data content section (free zone) in a the following format:
 ```jsonc
 {
@@ -57,7 +48,7 @@ So in order to create a new token, we should:
 
 The `type` will say to the validation nodes to mint the number of tokens given in the `supply` attribute, by creating new UTXO for the next transaction of the chain. Because we can rely on specific functional type, nodes can apply custom behavior during the transaction validation.
 
-The `supply` allows to mint one (Non Fungible Token use case)  or many tokens at once (ERC like use case)
+The `supply` allows to mint one (Non Fungible use case)  or many tokens at once (Token use case)
 
 The `name` helps client application to show the token name to be more user-friendly.
 This will not impact the validation node behavior during the transaction validation.
@@ -89,7 +80,7 @@ For example, if we want to create a collection of 3 tokens, which should be uniq
 } 
 ```
 
-During transaction validations, the miner will create the following UTXOs:
+During transaction validation, the miner will create the following UTXOs:
 ```json
 [
    { "type": "NFT", "address": "address of the transaction", "id": 0 }
