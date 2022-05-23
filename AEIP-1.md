@@ -19,6 +19,14 @@ The AEIP author is responsible for building consensus within the community and d
 
 Because the AEIPs are maintained as text files in a versioned repository, their revision history is the historical record of the feature proposal. 
 
+# AEIP status term
+
+- **Draft**: the first formally tracked stage of an AEIP in development. An AEIP is merged by an AEIP Editor into the AEIP repository when properly formatted.
+- **Review**: The AEIP is marked as ready for and requesting Peer Review.
+- **Final**: The AEIP represents the final standard. A Final AEIP exists in a state of finality and should only be updated to correct errata and add non-normative clarifications.
+- **Active**: A special status for AEIPs that are designed to be continually updated and not reach a state of finality. This includes most notably [AEIP-1](https://github.com/archethic-foundation/aeip/blob/main/AEIP-1.md).
+- **Stagnant**: Any AEIP in Draft or Review if inactive for a period of 6 months or greater is moved to Stagnant. An AEIP may be resurrected from this state by Authors or AEIP Editors through moving it back to Draft.
+
 # AEIP types
 
 * A Standards Track AEIP describes any change that affects Archethic implementation, such as a change to the network protocol, 
@@ -66,10 +74,13 @@ It is highly recommended that a single AEIP contain a single key proposal or new
 The more focused the AEIP, the more successful it tends to be. 
 If in doubt, split your AEIP into several well-focused ones. 
 
-Once the idea is well-formalized, the AEIP's author can submit a pull-request to the [AEIP repository](https://github.com/archethic-foundation/aeip) to propose 
-its enhancement.
+Once the idea is well-formalized, the AEIP's author can submit a pull-request to the [AEIP repository](https://github.com/archethic-foundation/aeip) to propose its enhancement.
+
+Hence the pull-request should mention the status "Draft", as well as other properties (creation date, AEIP type, etc.)
 
 ## Validation
+
+### Draft
 
 The AEIP editor reserves the right to reject AEIP proposals if they appear too unfocused or too broad. 
 
@@ -85,10 +96,39 @@ Standards Track AEIPs consist of two parts:
 - a design document
 - a reference implementation. 
 
+At this point the editor will:
+- Read the AEIP to check if it is ready: sound and complete. The ideas must make technical sense, even if they don’t seem likely to get to final status.
+- Check if the title should accurately describe the content.
+- Check the AEIP for language (spelling, grammar, sentence structure, etc.), markup (GitHub flavored Markdown), code style
+
+If the AEIP isn’t ready, the editor will send it back to the author for revision, with specific instructions.
+
+Once the AEIP is ready for the repository, the AEIP editor will:
+- Assign an AEIP number (generally the PR number, but the decision is with the editors)
+- Merge the corresponding pull request
+- List the AEIP in README.md
+
+The AEIP author may update the Draft as necessary in the git repository. 
+Updates to drafts may also be submitted by the author as pull requests.
+
+The editors don’t pass judgment on AEIPs. We merely do the administrative & editorial part.
+
+### Reviewed
+
+Once the proposal have been merged, the edit will create an issue to request peer review and gather comments and consensus if applicable.
+
 The AEIP should be reviewed and accepted before a reference implementation is begun, 
 unless a reference implementation will aid people in studying the AEIP. 
 
-Standards Track AEIPs must include an implementation -- in the form of code, a patch, or a URL to same -- before it can be considered Final. 
+### Final
+
+To become "Final" a proposal - according of its type - will required:
+- Standard Track: it must include an implementation in form of code resulting into a pull-request and must be accepted according to the repository rules. It should also include an update of the Archethic's documentation.
+- Informational/Process: enough consensus from the peer review should be present to make it final.
+
+### Stagnant
+
+If a proposal remains in "Draft" or "Reviewed" for a significant period of time (more than 6 months), the editor can update the AEIP's status to "Stagnant"
 
 ### Criteria for a successful AEIP 
 
@@ -129,7 +169,6 @@ This is intended for Informational AEIPs, where version 2 of an API can replace 
 
 Some Informational and Process AEIPs may also have a status of "Active" if they are never meant to be completed. E.g. AEIP 1 (this AEIP). 
 
-
 ## Header preamble
 
 Each AEIP must begin with an RFC 822 style header preamble. 
@@ -142,9 +181,9 @@ All other headers are required.
   AEIP: <AEIP number>
   Title: <AEIP title>
   Author: <list of authors real names and optionally, email addrs>
-  Status: <Draft | Review | Final | Replaced | Active>
+  Status: <Draft | Reviewed | Final | Active | Replaced | Stagnant>
   Type: <Standards Track | Informational | Process>
-  * Category: <Core | Networkin | Interface | AERC>
+  * Category: <Core | Networking | Interface | AERC>
   Created: <date created on, in ISO 8601 (yyyy-mm-dd) format>
   * Replaced-By: <AEIP number>
   ---
