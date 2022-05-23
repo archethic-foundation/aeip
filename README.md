@@ -17,5 +17,6 @@ With those document we aim to create standards for Archethic network implementat
 | Number | Title | Type | Category | Status |  
 |-|-|-|-|-|
 | [1](https://github.com/archethic-foundation/aeip/blob/main/AEIP-1.md) |  [AEIP Purpose and Guidelines](https://github.com/archethic-foundation/aeip/blob/main/AEIP-1.md) | | Process | Active | 
+| [2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md) |  [AEIP Token standard](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md) | AERC | Standard Track | Draft | 
 
 
