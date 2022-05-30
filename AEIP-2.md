@@ -134,7 +134,7 @@ For example, a collection with 2 tokens which pre-determined ID encoded in that 
 ```json
 {
    "supply": 2,
-   "name: "My NFT",
+   "name": "My NFT",
    "type": "non-fungible",
    "properties": [
      [
