@@ -149,7 +149,7 @@ For example, a collection with 2 tokens which pre-determined ID encoded in that 
 ```
 
 will create two UTXO with a specific ID:
-```
+```json
 [
    { "type": "token", "address": "address of the transaction", "id": 42 }
    { "type": "token", "address": "address of the transaction", "id": 2022 }
