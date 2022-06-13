@@ -2,8 +2,8 @@
 AEIP: 3
 Title: Deeplinking
 Author: Sylvain Séramy <sylvain@uniris.io>
-Type: Process AEIP
-Category: -
+Type: Standard Track
+Category: AERC
 Status: Draft
 Created: 2022-06-12
 ---
