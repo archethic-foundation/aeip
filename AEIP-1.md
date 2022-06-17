@@ -58,6 +58,7 @@ Asking the Archethic community first if an idea is original helps prevent too mu
 It also helps to make sure the idea is applicable to the entire community and not just to the author. 
 
 Just because an idea sounds good to the author does not mean it will work for most people in most areas where Archethic is used. 
+Hence we strongly recommend author to request the community either through [Github Discussion](https://github.com/archethic-foundation/aeip/discussions/categories/ideas) or [Github Issue](https://github.com/archethic-foundation/aeip/issues)
 
 Small enhancements or patches often don't need standardization between multiple projects;
 these don't need an AEIP and should be injected into the relevant Archethic development workflow 
