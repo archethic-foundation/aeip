@@ -34,6 +34,7 @@ So in order to create a new token, we should:
 {
    "supply": NB_OF_TOKEN_TO_CREATE,
    "name": "NAME OF MY TOKEN",
+   "symbol": "MNFT",
    "type": "fungible",
    "properties": [
      // ...
@@ -47,8 +48,10 @@ Because we can rely on specific functional type, nodes can apply custom behavior
 
 - `supply`: give information to nodes to mint one or multiple tokens at once
 
-- `name`: helps client application to display the token name to be more user-friendly.
+- `name`: help client application to display the token name to be more user-friendly.
 This will not impact the behaviour of the validation nodes during the transaction validation.
+
+- `symbol`: specify the token symbol. This will not impact the behaviour of the validation nodes during the transaction validation.
 
 - `type`: helps application to distinguish fungible and non-fungible tokens, but also inform the nodes which validation or mining behavior need to applied. ([See collection use case](#collection))  
 
@@ -66,6 +69,7 @@ Example of token with properties:
    "supply": 2,
    "type": "non-fungible",
    "name": "My NFT",
+   "symbol: "MNFT",
    "properties": [
      [
        {
@@ -100,6 +104,8 @@ For example, if we want to create a collection of 3 tokens, which should be uniq
 {
    "supply": 3,
    "name": "My NFT",
+   "type": "non-fungible",
+   "symbol": "MNFT",
    "properties": [
      [
        { "name": "image", "value": "link of the 1st NFT image"},
