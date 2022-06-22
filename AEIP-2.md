@@ -69,7 +69,7 @@ Example of token with properties:
    "supply": 2,
    "type": "non-fungible",
    "name": "My NFT",
-   "symbol: "MNFT",
+   "symbol": "MNFT",
    "properties": [
      [
        {
@@ -143,6 +143,7 @@ For example, a collection with 2 tokens which pre-determined ID encoded in that 
    "supply": 2,
    "name": "My NFT",
    "type": "non-fungible",
+   "symbol": "MNFT",
    "properties": [
      [
         { "name": "id", "value": 42}
