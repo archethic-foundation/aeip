@@ -66,7 +66,7 @@ Two attributes compose each property:
 Example of token with properties:
 ```json
 {
-   "supply": 2,
+   "supply": 1,
    "type": "non-fungible",
    "name": "My NFT",
    "symbol": "MNFT",
@@ -123,13 +123,14 @@ For example, if we want to create a collection of 3 tokens, which should be uniq
 During transaction validation, the miner will create the following UTXOs:
 ```json
 [
-   { "type": "token", "address": "address of the transaction", "id": 0 }
    { "type": "token", "address": "address of the transaction", "id": 1 }
    { "type": "token", "address": "address of the transaction", "id": 2 }
+   { "type": "token", "address": "address of the transaction", "id": 3 }
 ]
 ```
 
-The token ID for a collection will be determined by its position in the list starting from 0 to n, 0 being the first element in the collection of properties.
+The token ID for a collection will be determined by its position in the list starting from 1 to n, 1 being the first element in the collection of properties.
+The token ID 0 is reserved for fungible tokens.
 
 So in order to transfer the 2nd, we could specify in the transaction ledger operations to spend the asset from the UTXO's ID: 1
 
