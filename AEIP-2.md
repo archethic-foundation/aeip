@@ -132,7 +132,7 @@ During transaction validation, the miner will create the following UTXOs:
 The token ID for a collection will be determined by its position in the list starting from 1 to n, 1 being the first element in the collection of properties.
 The token ID 0 is reserved for fungible tokens.
 
-So in order to transfer the 2nd, we could specify in the transaction ledger operations to spend the asset from the UTXO's ID: 1
+So in order to transfer the 2nd, we could specify in the transaction ledger operations to spend the asset from the UTXO's ID: 2
 
 #### Token's ID association
 
@@ -177,11 +177,11 @@ So, a simple ledger operation as UCO transfer allows transferring non-native tok
    "data": {
      "ledger": {
        "uco": {},
-       "nft": {
+       "token": {
          "transfers": [
            { 
              "to": "address of the recipient", 
-             "from": "address of the nft", 
+             "from": "address of the token", 
              "id": "UTXO's ID", 
              "amount": 1
            }
