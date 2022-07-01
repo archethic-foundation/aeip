@@ -30,7 +30,7 @@ archethic
 
 #### Workflow
 
-User clicks on a link on a website contained an url structured to launch the mobile app directly in transfert transaction screen prefilled with recipient(s) and amount
+User clicks on a link on a website contained an url structured to launch the mobile app directly in transfer transaction screen prefilled with recipient(s) and amount
 Next, user has just to confirmed the transaction in the app.
 
 #### Structure 
