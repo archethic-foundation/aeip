@@ -100,7 +100,7 @@ To achieve this, the `properties` attribute will be used, to determine the numbe
 Each property list, will produce several UTXO with their own ID, to give unique properties to a collection item.
 
 For example, if we want to create a collection of 3 tokens, which should be unique and transferable separately, we can encode the transaction content in that way:
-```json
+```jsonc
 {
    "supply": 300000000, // Represents 3 tokens in 10e8
    "name": "My NFT",
