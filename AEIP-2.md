@@ -32,7 +32,7 @@ So in order to create a new token, we should:
 - Insert the metadata of the token in the transaction data content section (free zone) in the following format:
 ```jsonc
 {
-   "supply": NB_OF_TOKEN_TO_CREATE,
+   "supply": NB_OF_TOKEN_TO_CREATE, // Must be in 10e8 format (aka smallest unit of UCO is 10e-8)
    "name": "NAME OF MY TOKEN",
    "symbol": "MNFT",
    "type": "fungible",
@@ -46,7 +46,7 @@ Because we can rely on specific functional type, nodes can apply custom behavior
 
 ### Token metadata
 
-- `supply`: give information to nodes to mint one or multiple tokens at once
+- `supply`: give information to nodes to mint one or multiple tokens at once (the amount should be represented in the smallest unit of UCO which is 10<sup>-8
 
 - `name`: help client application to display the token name to be more user-friendly.
 This will not impact the behaviour of the validation nodes during the transaction validation.
@@ -64,9 +64,9 @@ Two attributes compose each property:
   - `value`: represents the property's value
 
 Example of token with properties:
-```json
+```jsonc
 {
-   "supply": 1,
+   "supply": 100000000, // Represent 1 in 10e8 representation
    "type": "non-fungible",
    "name": "My NFT",
    "symbol": "MNFT",
@@ -102,7 +102,7 @@ Each property list, will produce several UTXO with their own ID, to give unique 
 For example, if we want to create a collection of 3 tokens, which should be unique and transferable separately, we can encode the transaction content in that way:
 ```json
 {
-   "supply": 3,
+   "supply": 300000000, // Represents 3 tokens in 10e8
    "name": "My NFT",
    "type": "non-fungible",
    "symbol": "MNFT",
@@ -139,9 +139,9 @@ So in order to transfer the 2nd, we could specify in the transaction ledger oper
 But in some case, developers may want to specify a given ID to a token could do it by using a specific attribute `id`.
 
 For example, a collection with 2 tokens which pre-determined ID encoded in that way:
-```json
+```jsonc
 {
-   "supply": 2,
+   "supply": 200000000, // Represents 2 in 10e8 
    "name": "My NFT",
    "type": "non-fungible",
    "symbol": "MNFT",
