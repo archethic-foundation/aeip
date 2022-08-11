@@ -108,13 +108,13 @@ For example, if we want to create a collection of 3 tokens, which should be uniq
    "symbol": "MNFT",
    "properties": [
      [
-       { "name": "image", "value": "link of the 1st NFT image"},
+       { "name": "image", "value": "link of the 1st NFT image"}
      ],
      [
-       { "name": "image", "value": "link of the 2nd NFT image"},
+       { "name": "image", "value": "link of the 2nd NFT image"}
      ],
      [
-       { "name": "image", "value": "link of the 3rd NFT image"},
+       { "name": "image", "value": "link of the 3rd NFT image"}
      ]
    ]
 } 
