@@ -32,13 +32,14 @@ So in order to create a new token, we should:
 - Insert the metadata of the token in the transaction data content section (free zone) in the following format:
 ```jsonc
 {
-   "supply": NB_OF_TOKEN_TO_CREATE, // Must be in 10e8 format (aka smallest unit of UCO is 10e-8)
-   "name": "NAME OF MY TOKEN",
-   "symbol": "MNFT",
+   "supply": NB_OF_TOKEN_TO_CREATE, // Must be in 10e6 format (defined by decimals attribute)
    "type": "fungible",
-   "properties": [
+   "decimals": 6,
+   "name": "NAME OF MY TOKEN",
+   "symbol": "MTK",
+   "properties": {
      // ...
-   ]
+   }
 }
 ```
 
@@ -46,22 +47,25 @@ Because we can rely on specific functional type, nodes can apply custom behavior
 
 ### Token metadata
 
-- `supply`: give information to nodes to mint one or multiple tokens at once (the amount should be represented in the smallest unit of UCO which is 10<sup>-8
+- `supply`: (mandatory) give information to nodes to mint one or multiple tokens at once (the amount should be represented in the smallest unit of the token which is defined by `decimals` attribute (10<sup>-8</sup> by default)). Maximum supply value is 2<sup>64</sup> - 1
+   
+- `type`: (mandatory) helps application to distinguish fungible and non-fungible tokens, but also inform the nodes which validation or mining behavior need to applied. ([See collection use case](#collection))
+   
+- `decimals`: number of decimal used to display the token (default and maximum is 8). This attribute have to be the default value for non-fungible token.
 
 - `name`: help client application to display the token name to be more user-friendly.
 This will not impact the behaviour of the validation nodes during the transaction validation.
 
 - `symbol`: specify the token symbol. This will not impact the behaviour of the validation nodes during the transaction validation.
 
-- `type`: helps application to distinguish fungible and non-fungible tokens, but also inform the nodes which validation or mining behavior need to applied. ([See collection use case](#collection))  
-
 - `properties`: allows a token to define a set of arbitrary properties that an asset can have encoded in a list of objects.
 
 ### Properties metadata
 
-Two attributes compose each property:
-  - `name`: represents the property's name, which helps applications to find the right value they need
-  - `value`: represents the property's value
+`properties` attribute is an object having one or multiple properties.
+ Each property is represented by a key -> value pair:
+  - key is the property's name, which helps applications to find the right value they need
+  - value is the property's information
 
 Example of token with properties:
 ```jsonc
@@ -70,21 +74,14 @@ Example of token with properties:
    "type": "non-fungible",
    "name": "My NFT",
    "symbol": "MNFT",
-   "properties": [
-     [
-       {
-         "name": "image",
-         "value": "base64 of the image"
-       }
-     ]
-   ]
+   "properties": {
+      "image": "base64 of the image",
+      "description": "This is a NFT with an image"
+   }
 }
 ```
 
-For instance, a NFT could have a set of properties describing the image source (either base64 encoding or external link) as well as other properties to identify the asset.
-
-
-Array of object define the properties, so we can extend it later with the addition of new attribute being backward compatible.
+Properties defined there are global and applied to all tokens minted.
 
 ### Collection
 
@@ -93,11 +90,13 @@ Using a specific token type, we can control how the token will be minted accordi
 
 #### Creation
 
-In that sense, the `properties` and `supply` can be checked to ensure the right number of distinct UTXO we want to create.
+The attribute `collection` is used to distinguish different properties for each NFT.
+   
+This attribute is an array of object which each object represent the properties for a specific NFT. (object have the same format than `properties` attribute)
 
-To achieve this, the `properties` attribute will be used, to determine the number of distinct UTXO we want to create.
+In that sense, the `collection` and `supply` can be checked to ensure the right number of distinct UTXO we want to create. `supply` has to be the same value than the length of `collection` array.
 
-Each property list, will produce several UTXO with their own ID, to give unique properties to a collection item.
+Each collection object will produce a UTXO with its own ID, to give unique properties to a collection item.
 
 For example, if we want to create a collection of 3 tokens, which should be unique and transferable separately, we can encode the transaction content in that way:
 ```jsonc
@@ -106,16 +105,16 @@ For example, if we want to create a collection of 3 tokens, which should be uniq
    "name": "My NFT",
    "type": "non-fungible",
    "symbol": "MNFT",
-   "properties": [
-     [
-       { "name": "image", "value": "link of the 1st NFT image"}
-     ],
-     [
-       { "name": "image", "value": "link of the 2nd NFT image"}
-     ],
-     [
-       { "name": "image", "value": "link of the 3rd NFT image"}
-     ]
+   "properties": {
+      "description": "this property is for all NFT"
+   },
+   "collection": [
+      { "image": "link of the 1st NFT image" },
+      { "image": "link of the 2nd NFT image" },
+      {
+         "image": "link of the 3rd NFT image",
+         "other_property": "other value"
+      }
    ]
 } 
 ```
@@ -145,13 +144,9 @@ For example, a collection with 2 tokens which pre-determined ID encoded in that 
    "name": "My NFT",
    "type": "non-fungible",
    "symbol": "MNFT",
-   "properties": [
-     [
-        { "name": "id", "value": 42}
-     ],
-     [
-        { "name": "id", "value": 2022}
-     ]
+   "collection": [
+      { "id": 42 },
+      { "id": 2022 }
    ]
 }
 ```
@@ -164,13 +159,12 @@ will create two UTXO with a specific ID:
 ]
 ```
 
-Note: **this ID specification makes only sense for NFT use cases, fungible tokens don't make distinct information regarding tokens. Hence, this behavior during the transaction validation can be matched regarding the type of token to create**. 
-
-
 ## Transfer
 
 Because we are not leveraging smart contract for asset transfer, it becomes native to the protocol.
 So, a simple ledger operation as UCO transfer allows transferring non-native tokens.
+
+For non-fungible token, transfer amount can only be an integer.
 
 ```json
 {
@@ -188,6 +182,6 @@ So, a simple ledger operation as UCO transfer allows transferring non-native tok
          ]
        }
      }
-   }  
+   }
 }
 ```
