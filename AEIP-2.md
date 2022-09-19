@@ -47,7 +47,7 @@ Because we can rely on specific functional type, nodes can apply custom behavior
 
 ### Token metadata
 
-- `supply`: (mandatory) give information to nodes to mint one or multiple tokens at once (the amount should be represented in the smallest unit of the token which is defined by `decimals` attribute (10<sup>-8</sup> by default))
+- `supply`: (mandatory) give information to nodes to mint one or multiple tokens at once (the amount should be represented in the smallest unit of the token which is defined by `decimals` attribute (10<sup>-8</sup> by default)). Maximum supply value is 2<sup>64</sup> - 1
    
 - `type`: (mandatory) helps application to distinguish fungible and non-fungible tokens, but also inform the nodes which validation or mining behavior need to applied. ([See collection use case](#collection))
    
