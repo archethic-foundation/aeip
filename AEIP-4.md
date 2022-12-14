@@ -11,8 +11,6 @@ Created: 2022-11-29
 
 **AEIP-4** purpose is to define a **communication protocol** between decentralized apps and Archethic Wallet.
 
-> ⚠️ This is a Draft.
->
 > Communication protocols proposals are listed here.
 
 # Specification 1: Local RPC server
