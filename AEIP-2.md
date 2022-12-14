@@ -4,7 +4,7 @@ Title: Token standard
 Author: Samuel Manzanera <samuel@uniris.io>
 Type: Standard Track
 Category: AERC
-Status: Review
+Status: Final
 Created: 2022-05-23
 ---
 
