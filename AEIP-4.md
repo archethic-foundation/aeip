@@ -3,7 +3,8 @@ AEIP: 4
 Title: Decentralized app / Wallet communication
 Author: Charly Caulet
 Status: Draft
-Type: Standards Track
+Type: Standard Track
+Category: Interface
 Created: 2022-11-29
 ---
 
