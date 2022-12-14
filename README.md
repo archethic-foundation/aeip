@@ -19,6 +19,6 @@ With those document we aim to create standards for Archethic network implementat
 | [1](https://github.com/archethic-foundation/aeip/blob/main/AEIP-1.md) |  [AEIP Purpose and Guidelines](https://github.com/archethic-foundation/aeip/blob/main/AEIP-1.md) | | Process | Active | 
 | [2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md) |  [Token standard](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md) | AERC | Standard Track | Final | 
 | [3](https://github.com/archethic-foundation/aeip/blob/main/AEIP-3.md) |  [Deeplinking](https://github.com/archethic-foundation/aeip/blob/main/AEIP-3.md) | AERC | Standard Track | Draft | 
-| [4](https://github.com/archethic-foundation/aeip/blob/main/AEIP-4.md) |  [Decentralized App & Wallet communication](https://github.com/archethic-foundation/aeip/blob/main/AEIP-4.md) | AERC | Standard Track | Draft | 
+| [4](https://github.com/archethic-foundation/aeip/blob/main/AEIP-4.md) |  [Decentralized App & Wallet communication](https://github.com/archethic-foundation/aeip/blob/main/AEIP-4.md) | Interface | Standard Track | Draft | 
 
 
