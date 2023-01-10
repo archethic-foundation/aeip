@@ -4,7 +4,7 @@ Title: Deeplinking
 Author: Sylvain Séramy <sylvain@uniris.io>
 Type: Standard Track
 Category: AERC
-Status: Draft
+Status: Stagnant
 Created: 2022-06-12
 ---
 
