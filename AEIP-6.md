@@ -23,10 +23,12 @@ The use of a keychain-type transaction has two positive points:
 - the transaction fees associated with the `keychain` type transaction are free (=0 UCO), which is beneficial for users.
 
 This AEIP addresses this need with these specific informations:
-- archiving of fungible or non-fungible tokens,
+- archiving of smart-contracts, fungible or non-fungible tokens,
 - sender blacklist, 
 - contact address book.
 *Other AEIPs may be able to further complement this need*
+
+Reminder: a transaction can't exceed 3 Mo.
 
 ## Restriction
 
@@ -121,14 +123,20 @@ The scope notion must therefore be defined for each item in order to specify on 
 
 ## Personalization informations
 
-### Tokens Archiving
+### Tokens/Smart Contracts Archiving
 
 #### Definition
 
-In order to prevent spam actionsn, to convert tokens into cold data or to hide in a DApp some tokens, it may be useful to have an archiving function. 
+In order to prevent spam actions, to convert tokens or smart contracts into cold data or to hide in a DApp some tokens or smart contracts , it may be useful to have an archiving function. 
+
+Focus on tokens:
 The addresses and IDs of archived tokens are stored in the keychain, and DApps can take this list into account to exclude or notify them as cold data. 
 Since a token is attached to a service of the keychain, it isn't necessary to specify the scope.
 *TODO: See if when sending a token to a recipient if the blockchain automatically removes the token from the archive.*
+
+Focus on smart contracts:
+The addresses of archived SC are stored in the keychain, and DApps can take this list into account to exclude or notify them as cold data. 
+The scope notion must therefore be defined for each item in order to specify on which service(s) the information is dedicated.
 
 #### Access scope of personalization
 
@@ -137,8 +145,10 @@ This information is provided in `public` scope.
 #### Structure
 
 List of archiving tokens property in `version: 1.0`.
-- `tokens`: contains the list of addresses and id to archive.
+- `tokens`: contains the list of addresses and id of a token to archive.
 *See [AEIP-2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md) for further informations.*
+
+- `smartContracts`: contains the list of addresses of a smart contract to archive.
 
 ```jsonc
 "archive": {
@@ -151,6 +161,19 @@ List of archiving tokens property in `version: 1.0`.
           {
             "address": "address of the transaction",
             "id": 0,
+          },
+        ],
+        "smartContracts": [
+          {
+            "address": "address of the SC",
+            "scope": "services",
+            "scopeList": [
+              "did:archethic:00003a9a8d5f1c39a849560c97d7cc53b6ab01e4af5f337c6e9bf0eba8c67ad46d34",
+            ]
+          },
+          {
+            "address": "address of the SC",
+            "scope": "keychain",
           },
         ]
       }
