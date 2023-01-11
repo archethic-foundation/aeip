@@ -12,9 +12,26 @@ Created: 2022-11-29
 
 **AEIP-4** purpose is to define a **communication protocol** between decentralized apps and Archethic Wallet.
 
-> Communication protocols proposals are listed here.
+> Communication protocols depend on the host operating system. Proposals are listed here.
 
-# Specification 1: Local RPC server
+# Functionnalities to expose to DApps
+
+## Sign and send Transaction
+
+- **Input :** Transaction
+- **Operation :** Sign and send Transaction. Wait for nodes validation
+- **Output :** Validation result + Transaction address
+
+## GraphQL Queries
+- **Input :** GraphQL query (String)
+- **Output :** GraphQL response (String)
+
+## GraphQL subscription (Desktop only)
+- **Input :** GraphQL query (String)
+- **Output :** GraphQL response (String)
+
+
+# Desktop - Heavy & Web client : Local RPC server
 
 | Platform | Support |
 |----------|:--:|
@@ -23,8 +40,8 @@ Created: 2022-11-29
 
 ## Overview
 
-- **Wallet app** providing an **RPC server**
-- **Browser extension** implementing [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193). **Extension** delegates proxies RPC to **Wallet app RPC server**
+- **Wallet app** provides an **RPC server**
+- **Browser extension** injects a client in web pages (like [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193 does). **Extension** proxies RPC to **Wallet app RPC server**
 
 ## Protocol (WebDapp <-> Wallet)
 
@@ -43,7 +60,7 @@ sequenceDiagram
     Wallet->>WalletExt: OK
     WalletExt->>Dapp: OK
 ```
-`
+
 ### RPC
 ```mermaid
 sequenceDiagram
@@ -61,20 +78,8 @@ sequenceDiagram
     WalletExt->>Dapp: TxAddress
 ```
 
-# Specification 2: Wallet embedded Webview
 
-| Platform | Support |
-|----------|:--:|
-| Mobile (Web/App)              | ✅ |
-| MacOS/Windows/Linux (Web/App) | ✅ |
-
-## Overview
-
-**Wallet application** holds a "webview screen". Webview injects an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) implementations.
-
-That way, any visited website can interact with the user's wallet.
-
-# Specification 3: DeepLink
+# Mobile : DeepLink
 
 | Platform | Support |
 |----------|:--:|
@@ -104,9 +109,7 @@ sequenceDiagram
 ```
 
 
-## Limitations
-
-Howto send a file to create a NTF ?
+## Limitations : Howto send heavy payloads (NFT creation) ?
 
 ```mermaid
 sequenceDiagram
@@ -147,7 +150,20 @@ sequenceDiagram
     Dapp->>Wallet: Next operations can be encrypted
 ```
 
-1. WalletApp generates private and public keys (stored in secure storage)
+1. WalletApp generates symmetric keys (stored in secure storage)
 2. DApp requests WalletApp public key (via Deeplink)
 3. WalletApp sends public key back using DApp Deeplink callback
 4. Next DApp->WalletApp communication's payloads are encrypted using WalletApp public key
+
+# [deprecated solution] Wallet embedded Webview
+
+| Platform | Support |
+|----------|:--:|
+| Mobile (Web/App)              | ✅ |
+| MacOS/Windows/Linux (Web/App) | ✅ |
+
+## Overview
+
+**Wallet application** holds a "webview screen". Webview injects an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) implementations.
+
+That way, any visited website can interact with the user's wallet.
