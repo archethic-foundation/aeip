@@ -10,7 +10,7 @@ Created: 2022-11-29
 
 # Abstract
 
-**AEIP-4** purpose is to define a **communication protocol** between decentralized apps and Archethic Wallet.
+**AEIP-4** purpose is to define a **communication protocol** between decentralized applications and Archethic Wallet.
 
 > Communication protocols depend on the host operating system. Proposals are listed here.
 
@@ -40,27 +40,17 @@ Created: 2022-11-29
 
 ## Overview
 
-- **Wallet app** provides an **RPC server**
-- **Browser extension** injects a client in web pages (like [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193 does). **Extension** proxies RPC to **Wallet app RPC server**
+- **Wallet app** provides an **RPC server**. 
+  - Runs as the native desktop application.
+  - Provides a *notification zone* icon. Can be automatically run on computer startup.
+- **Browser extension** injects a client in web pages (like [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193 does).
+  - **Extension** proxies RPC to **Wallet app RPC server**.
+  - Can check **Wallet app**'s RPC server readyness.
+
+ ⚠️ ***Browser extension*** is NOT an **Archethic wallet** wrapped as a navigator extension. It is a distinct code base dedicated to that **RPC bridge** problematics.
+
 
 ## Protocol (WebDapp <-> Wallet)
-
-### First connection
-```mermaid
-sequenceDiagram
-    participant Dapp
-    participant WalletExt as Wallet Browser Extension
-    participant Wallet
-    participant User
-
-    Dapp->>WalletExt: authorizationRequest(website URL ?)
-    WalletExt->>Wallet: authorizationRequest(website URL ?)
-    Wallet->>User: authorizationRequest(website URL ?)
-    User->>Wallet: OK
-    Wallet->>WalletExt: OK
-    WalletExt->>Dapp: OK
-```
-
 ### RPC
 ```mermaid
 sequenceDiagram
@@ -76,6 +66,48 @@ sequenceDiagram
     Blockchain->>Wallet: TxAddress
     Wallet->>WalletExt: TxAddress
     WalletExt->>Dapp: TxAddress
+```
+
+## Security
+
+There are two kinds of RPC :
+
+  - Write **Remote Procedure Calls** (Commands). Those are used by DApps to publish content to the blockchain.
+  - Read **RPC** (Queries). Used by DApps to read blockchain content.
+
+### Commands :
+Commands payload might contain private data. In that case, **private data** will be encypted by **DApp** before sending it to **Wallet**.
+
+
+```mermaid
+sequenceDiagram
+    participant Dapp as DApp
+    participant Wallet as WalletApp
+    participant Blockchain as Archethic Blockchain
+
+    Dapp->>Dapp: encypt data
+    Dapp->>Wallet: Command, encryptedData
+    Wallet->>Blockchain: Transaction(encryptedData)
+    Wallet->>Dapp: Result
+```
+
+### Queries :
+
+Some queries might return user **private data**. In that case, **Wallet** will encrypt data with **DApp** public key before sending it.
+
+
+```mermaid
+sequenceDiagram
+    participant Dapp as DApp
+    participant Wallet as WalletApp
+    participant Blockchain as Archethic Blockchain
+
+    Dapp->>Wallet: Query, Dapp_public_key
+    Wallet->>Blockchain: Query
+    Blockchain->>Wallet: blockchainEncryptedData
+    Wallet->>Wallet: Decrypt blockchainEncryptedData using seed
+    Wallet->>Wallet: Encrypt data using Dapp_public_key
+    Wallet->>Dapp: encryptedData
 ```
 
 
@@ -167,3 +199,20 @@ sequenceDiagram
 **Wallet application** holds a "webview screen". Webview injects an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) implementations.
 
 That way, any visited website can interact with the user's wallet.
+
+
+# [deprecated solution] Wallet wrapped as a navigator extension
+
+| Platform | Support |
+|----------|:--:|
+| Mobile (Web/App)              | ❌ |
+| MacOS/Windows/Linux (Web/App) | ✅ |
+
+## Overview
+
+**Wallet application** is built in a navigator extension (like **Metamask** does).
+
+## Drawbacks
+
+- Used libraries are not always *web compatible*. (e.g. issues with pointycastle)
+- Interaction with hardware (Yubikey, Ledger) is tricky
