@@ -16,19 +16,115 @@ Created: 2022-11-29
 
 # Functionnalities to expose to DApps
 
-## Sign and send Transaction
+## **Command** | Sign and send Transaction
+
+A **DApp** delegates a transaction sign&send to **AEWallet**. 
+
+**AEWallet** will have to interactively ask for user approval. 
+By default, transaction is sent on currently selected **account** (**service**). A dropdown allows user to change the destination **account**.
 
 - **Input :** Transaction
 - **Operation :** Sign and send Transaction. Wait for nodes validation
 - **Output :** Validation result + Transaction address
 
-## GraphQL Queries
+## **Query** | **target 🖥️** | Read (or subscribe) public data 
+
+On Desktop target, a **DApp** can simply use a bi-directional communication channel (Websocket RPC) to fetch public data.
+
 - **Input :** GraphQL query (String)
 - **Output :** GraphQL response (String)
 
-## GraphQL subscription (Desktop only)
-- **Input :** GraphQL query (String)
-- **Output :** GraphQL response (String)
+## **Query** | **target 📱** | Read public data
+
+> ⚠️ This is a workaround for mobile applications.
+
+On a smartphone (especially under iOS), the two way communication channel (Deeplink RPC) will display (even for a short moment) the **AEWallet** application.
+
+This has a major ergonomic impact. Indeed, requesting an Account balance update would switch to **AEWallet**, then go back to **DApp**.
+
+
+A workaround for reading public data would be to retrieve the **accounts** adrresses once. Then, the **Dapp** could directly query the **blockchain**.
+
+In order to read the **Keychain** public data, a **DApp** needs to know "where" to read the Keychain's account data.
+
+
+**Read public endpoints response example :**
+```json
+{
+	"endpoint": "https://mainnet.archethic.net",
+	"accounts": [
+		{
+			"name": "Alice",
+			"genesis_address": "00006e034cdb146fcbc17c55f23ff8c2317e3fb0aee5b5612901acfdf003e540144b"
+		},
+		{
+			"name": "Bob",
+			"genesis_address": "0000f5006068d072f12f2576ab4adcabdbaeae9fd77b0f1ebdf051e48813df648a4b"
+		}
+	]
+}
+```
+
+
+## **Query** | **target 🖥️** | Read private data
+
+Reading private data requires an explicit user permission.
+
+```mermaid
+sequenceDiagram
+    participant Dapp as DApp
+    participant Wallet as WalletApp
+    participant User as User
+    participant Blockchain as Archethic Blockchain
+
+    Dapp->>Wallet: privateDataReadAuthorization
+    Wallet->>User: Asks user permission
+    User->>Wallet: OK
+    Wallet->>Wallet: Generates JWT, with an AES key in it
+    Wallet->>Dapp: JWT
+    Dapp->>Wallet: read query + JWT
+    Wallet->>Wallet: Checks JWT validity
+    Wallet->>Blockchain: Sends query
+    Blockchain->>Wallet: result
+    Wallet->>Dapp: result encrypted with JWT.AES key
+```
+
+**authorization request :**
+```json
+{
+	"dapp_name": "Super appli",
+	"request_shared_secret": "emoji affiché la dapp",
+}
+```
+
+**authorization response :**
+```json
+{
+	"jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBRVMiOiJBNzVFNjA4ODk2NDY2RTBEQTM5QjYzMTIxN0YxODYwQTlDRDg5RjFGQjE4MEIyMUVFRUU5QzFCNjJEMTQ3Q0I0IiwiZXhwaXJhdGlvbl9kYXRlIjoxNjc1NzgxOTkyfQ.t6CcSpBLkUbZObP2LC-4BY7Qr6SU3OmdYtocFvawgnU",
+}
+```
+
+**JWT payload :**
+```json
+{
+  "AES": "A75E608896466E0DA39B631217F1860A9CD89F1FB180B21EEEE9C1B62D147CB4", // Key used to encrypt private communications
+  "expiration_date": 1675781992 // JWT expiration date
+}
+```
+
+
+
+## **Query** | **target 📱** | Read private data
+
+> ⚠️ This use case is in a dead-end for now.
+
+On a smartphone (especially under iOS), the two way communication channel (Deeplink RPC) will display (even for a short moment) the **AEWallet** application.
+
+This has a major ergonomic impact. Indeed, requesting an private data update would switch to **AEWallet**, then go back to **DApp**.
+
+
+As we cannot reveal private key to **DApp**, it CANNOT request private data to **blockchain**.
+
 
 
 # Desktop - Heavy & Web client : Local RPC server
