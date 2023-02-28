@@ -22,5 +22,6 @@ With those document we aim to create standards for Archethic network implementat
 | [4](https://github.com/archethic-foundation/aeip/blob/main/AEIP-4.md) |  [Decentralized App & Wallet communication](https://github.com/archethic-foundation/aeip/blob/main/AEIP-4.md) | Interface | Standard Track | Draft | 
 | [5](https://github.com/archethic-foundation/aeip/blob/main/AEIP-5.md) | [Programmable / Smart UTXOs](https://github.com/archethic-foundation/aeip/blob/main/AEIP-5.md) | AERC | Standard Track | Draft |
 | [6](https://github.com/archethic-foundation/aeip/blob/main/AEIP-6.md) | [Keychain - Standardization](https://github.com/archethic-foundation/aeip/blob/main/AEIP-6.md) | AERC | Standard Track | Draft |
+| [8](https://github.com/archethic-foundation/aeip/blob/main/AEIP-8.md) | [Standard Specification Detection](https://github.com/archethic-foundation/aeip/blob/main/AEIP-8.md) | AERC | Standard Track | Draft |
 
 
