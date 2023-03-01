@@ -21,10 +21,10 @@ Created: 2022-11-29
 
 ## Desktop - Heavy & Web client : Local RPC server
 
-| Platform | Support |
-|----------|:--:|
-| Mobile (Web/App)              | ❌ |
-| MacOS/Windows/Linux (Web/App) | ✅ |
+| Platform                      | Support |
+| ----------------------------- | :-----: |
+| Mobile (Web/App)              |    ❌    |
+| MacOS/Windows/Linux (Web/App) |    ✅    |
 
 ### Overview
 
@@ -87,11 +87,11 @@ Success response :
 
 ## Mobile : DeepLink
 
-| Platform | Support |
-|----------|:--:|
-| Mobile (Web/App) | ✅ |
-| MacOS (Web/App) | ✅ |
-| Windows/Linux | ❌ |
+| Platform         | Support |
+| ---------------- | :-----: |
+| Mobile (Web/App) |    ✅    |
+| MacOS (Web/App)  |    ✅    |
+| Windows/Linux    |    ❌    |
 
 
 ### Overview
@@ -115,7 +115,7 @@ method_payload :     | Json Message |-> | gzip |-> | base64 |
                      +--------------+   +------+   +--------+
 
 
-Deeplink Url : `aewallet://archethic.net/<method_name>/<method_payload>`
+Deeplink Url : `<scheme>://<host>/<method_name>/<method_payload>`
 ```
 
 
@@ -127,7 +127,7 @@ method_payload :     | { "param1" : "a_value" } |----> | "H4sIAAAAAAAAA6tWUCpILE
                      +--------------------------+      +----------------------------------------------------------------+
 
 
-Deeplink Url : `aewallet://archethic.net/a_method/H4sIAAAAAAAAA6tWUCpILErMNVRSsFJQSowvS8wpTVVSqAUAhIgKchgAAAA=`
+Deeplink Url : `scheme://host/a_method/H4sIAAAAAAAAA6tWUCpILErMNVRSsFJQSowvS8wpTVVSqAUAhIgKchgAAAA=`
 
 ```
 
@@ -140,16 +140,16 @@ Requests payload are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/
 
 ```typescript
 {
-  "id": Number,       // a unique client-generated integer identifying the request
-  "replyUrl": String, // Deeplink URL to which send the invokation result. This should be a Deeplink URL handled by the DApp.
+  "id": Number,                     // An unique client-generated integer identifying the request
+  "replyUrl": String,               // Deeplink URL to which send the invokation result. This should be a Deeplink URL handled by the DApp.
   "params": {
     "origin": {
-      "name": Number,             // human readable identifier of the DApp
-      "url": String | undefined,   // URL of the DApp
-      "logo": Base64 | undefined,  // logo of the DApp 
+      "name": String,               // Human readable identifier of the DApp
+      "url": String | undefined,    // URL of the DApp
+      "logo": Base64 | undefined,   // Logo of the DApp 
     },
-    "version": 2,         // Version of the DApp API
-    "payload": Object,  // Method parameters
+    "version": 2,                   // Version of the DApp API
+    "payload": Object,              // Method parameters
   }
 }
 ```
@@ -158,8 +158,8 @@ Requests payload are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/
 
 ```typescript
 {
-  "id": Number,       // the request identifier
-  "result":  Object,  // result payload
+  "id": Number,                     // The request identifier
+  "result":  Object,                // Result payload
 }
 ```
 
@@ -167,17 +167,16 @@ Requests payload are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/
 
 ```typescript
 {
-  "id": Number,       // the request identifier
+  "id": Number,                     // The request identifier
   "failure": {
-    "code": Number,   // Error code
-    "message": String | undefined, // Error description
-    "data": Object | undefined,    // Error data
+    "code": Number,                 // Error code
+    "message": String | undefined,  // Error description
+    "data": Object | undefined,     // Error data
   },
 }
 ```
 
-
-### Limitations : Howto send heavy payloads (NFT creation) ?
+### Limitations : How to send heavy payloads (NFT creation) ?
 
 ```mermaid
 sequenceDiagram
