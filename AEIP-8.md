@@ -10,22 +10,22 @@ Created: 2023-02-28
 
 # Abstract
 
-The following standard defines a method to detect what specifitation a transaction content implements.  
+The following standard defines a method to detect what specification a transaction content implements.  
 The standard contains the following:
-- How to detect if a transaction implement this AEIP-8
+- How to detect if a transaction implements this AEIP-8
 - How to use this standard
 
 # Motivation
 
 Since [AEIP-2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md), tokens are created using the content part of a token transaction.  
 The content value must follow some specifications using JSON format with specific attributes.  
-In more general case, the content part of a transaction is a free place where any kind of value can be written, we need to identify if the content of a transaction follow some AEIP specification.
+In more general case, the content part of a transaction is a free place where any kind of value can be written, we need to identify if the content of a transaction follow some AEIP specifications.
 
 # Specification
 
-According to [AEIP-2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md), this specification keep using JSON format and adds a specific attribute which defines the implemented AEIP standards for a transaction.
+According to [AEIP-2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md), this specification keeps using JSON format and adds a specific attribute which defines the AEIP standards implemented for a transaction.
 
-The new attribute `aeip` is added in the root of the JSON structure. It is an array of positive integer where each value represent an AEIP number.
+The new attribute `aeip` is added in the root of the JSON structure. It's an array of positive integer where each value represent an AEIP number.
 ```jsonc
 {
   supply: 100000000,
@@ -74,5 +74,5 @@ It is recommended that future AEIP require this AEIP-8 if possible.
 
 Applications that require a specific AEIP standard to works can verify if the transaction implements the needed AEIP.
  
-For example if an application needs to display token name, it can gets the transaction which created a token, and read it's content.  
-If the transaction content follows the previous standard and the the AEIP-2 is implemented, the application knows that it can get from the token specification the attribute `name` or `symbol` to display it on a UI.
+For example if an application needs to display token name, it can get the transaction that created a token, and read its content.  
+If the transaction content follows the previous standard and the AEIP-2 is implemented, the application knows that it can get from the token specification the `name` or `symbol` attribute to display it on a UI.
