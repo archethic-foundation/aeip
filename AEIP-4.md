@@ -1,6 +1,6 @@
 ---
 AEIP: 4
-Title: Decentralized app / Wallet communication
+Title: Decentralized app / Wallet communication protocol
 Author: Charly Caulet
 Status: Draft
 Type: Standard Track
@@ -14,200 +14,78 @@ Created: 2022-11-29
 
 > Communication protocols depend on the host operating system. Proposals are listed here.
 
-# Functionnalities to expose to DApps
 
-## **Command** | Sign and send Transaction
+----
 
-A **DApp** delegates a transaction sign&send to **AEWallet**. 
+# Transport layer
 
-**AEWallet** will have to interactively ask for user approval. 
-By default, transaction is sent on currently selected **account** (**service**). A dropdown allows user to change the destination **account**.
-
-- **Input :** Transaction
-- **Operation :** Sign and send Transaction. Wait for nodes validation
-- **Output :** Validation result + Transaction address
-
-## **Query** | **target 🖥️** | Read (or subscribe) public data 
-
-On Desktop target, a **DApp** can simply use a bi-directional communication channel (Websocket RPC) to fetch public data.
-
-- **Input :** GraphQL query (String)
-- **Output :** GraphQL response (String)
-
-## **Query** | **target 📱** | Read public data
-
-> ⚠️ This is a workaround for mobile applications.
-
-On a smartphone (especially under iOS), the two way communication channel (Deeplink RPC) will display (even for a short moment) the **AEWallet** application.
-
-This has a major ergonomic impact. Indeed, requesting an Account balance update would switch to **AEWallet**, then go back to **DApp**.
-
-
-A workaround for reading public data would be to retrieve the **accounts** adrresses once. Then, the **Dapp** could directly query the **blockchain**.
-
-In order to read the **Keychain** public data, a **DApp** needs to know "where" to read the Keychain's account data.
-
-
-**Read public endpoints response example :**
-```json
-{
-	"endpoint": "https://mainnet.archethic.net",
-	"accounts": [
-		{
-			"name": "Alice",
-			"genesis_address": "00006e034cdb146fcbc17c55f23ff8c2317e3fb0aee5b5612901acfdf003e540144b"
-		},
-		{
-			"name": "Bob",
-			"genesis_address": "0000f5006068d072f12f2576ab4adcabdbaeae9fd77b0f1ebdf051e48813df648a4b"
-		}
-	]
-}
-```
-
-
-## **Query** | **target 🖥️** | Read private data
-
-Reading private data requires an explicit user permission.
-
-```mermaid
-sequenceDiagram
-    participant Dapp as DApp
-    participant Wallet as WalletApp
-    participant User as User
-    participant Blockchain as Archethic Blockchain
-
-    Dapp->>Wallet: privateDataReadAuthorization
-    Wallet->>User: Asks user permission
-    User->>Wallet: OK
-    Wallet->>Wallet: Generates JWT, with an AES key in it
-    Wallet->>Dapp: JWT
-    Dapp->>Wallet: read query + JWT
-    Wallet->>Wallet: Checks JWT validity
-    Wallet->>Blockchain: Sends query
-    Blockchain->>Wallet: result
-    Wallet->>Dapp: result encrypted with JWT.AES key
-```
-
-**authorization request :**
-```json
-{
-	"dapp_name": "Super appli",
-	"request_shared_secret": "emoji affiché la dapp",
-}
-```
-
-**authorization response :**
-```json
-{
-	"jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBRVMiOiJBNzVFNjA4ODk2NDY2RTBEQTM5QjYzMTIxN0YxODYwQTlDRDg5RjFGQjE4MEIyMUVFRUU5QzFCNjJEMTQ3Q0I0IiwiZXhwaXJhdGlvbl9kYXRlIjoxNjc1NzgxOTkyfQ.t6CcSpBLkUbZObP2LC-4BY7Qr6SU3OmdYtocFvawgnU",
-}
-```
-
-**JWT payload :**
-```json
-{
-  "AES": "A75E608896466E0DA39B631217F1860A9CD89F1FB180B21EEEE9C1B62D147CB4", // Key used to encrypt private communications
-  "expiration_date": 1675781992 // JWT expiration date
-}
-```
-
-
-
-## **Query** | **target 📱** | Read private data
-
-> ⚠️ This use case is in a dead-end for now.
-
-On a smartphone (especially under iOS), the two way communication channel (Deeplink RPC) will display (even for a short moment) the **AEWallet** application.
-
-This has a major ergonomic impact. Indeed, requesting an private data update would switch to **AEWallet**, then go back to **DApp**.
-
-
-As we cannot reveal private key to **DApp**, it CANNOT request private data to **blockchain**.
-
-
-
-# Desktop - Heavy & Web client : Local RPC server
+## Desktop - Heavy & Web client : Local RPC server
 
 | Platform | Support |
 |----------|:--:|
 | Mobile (Web/App)              | ❌ |
 | MacOS/Windows/Linux (Web/App) | ✅ |
 
-## Overview
+### Overview
 
-- **Wallet app** provides an **RPC server**. 
+- **Wallet app** provides a Websocket server using the **[JSON-RPC 2.0](https://www.jsonrpc.org/specification)**. 
   - Runs as the native desktop application.
   - Provides a *notification zone* icon. Can be automatically run on computer startup.
 - **Browser extension** injects a client in web pages (like [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193 does).
   - **Extension** proxies RPC to **Wallet app RPC server**.
   - Can check **Wallet app**'s RPC server readyness.
 
- ⚠️ ***Browser extension*** is NOT an **Archethic wallet** wrapped as a navigator extension. It is a distinct code base dedicated to that **RPC bridge** problematics.
+ ⚠️ ***Browser extension*** is NOT an **Archethic wallet** wrapped as a navigator extension. It is a distinct code base dedicated to **RPC bridge** problematics.
 
 
-## Protocol (WebDapp <-> Wallet)
-### RPC
-```mermaid
-sequenceDiagram
-    participant Dapp
-    participant WalletExt as Wallet Browser Extension
-    participant Wallet
-    participant Blockchain
+### Request formatting
+Requests are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/specification)** message.
 
-    Dapp->>WalletExt: sign(Tx)
-    WalletExt->>Wallet: sign(Tx)
-    Wallet->>Wallet: SignedTx
-    Wallet->>Blockchain: SignedTx
-    Blockchain->>Wallet: TxAddress
-    Wallet->>WalletExt: TxAddress
-    WalletExt->>Dapp: TxAddress
+```typescript
+{
+  "id": Number,     // a unique client-generated integer identifying the request
+  "jsonrpc": "2.0",
+  "method": String, // a string containing the method to be invoked
+  "params": {
+    "origin": {
+      "name": Number,             // human readable identifier of the DApp
+      "url": String | undefined,   // URL of the DApp
+      "logo": Base64 | undefined, // logo of the DApp 
+    },
+    "version": 2,         // Version of the DApp API
+    "payload": Object | undefined,  // Method parameters
+  }
+}
 ```
 
-## Security
+### Success Response formatting
 
-There are two kinds of RPC :
+Success response : 
 
-  - Write **Remote Procedure Calls** (Commands). Those are used by DApps to publish content to the blockchain.
-  - Read **RPC** (Queries). Used by DApps to read blockchain content.
-
-### Commands :
-Commands payload might contain private data. In that case, **private data** will be encypted by **DApp** before sending it to **Wallet**.
-
-
-```mermaid
-sequenceDiagram
-    participant Dapp as DApp
-    participant Wallet as WalletApp
-    participant Blockchain as Archethic Blockchain
-
-    Dapp->>Dapp: encypt data
-    Dapp->>Wallet: Command, encryptedData
-    Wallet->>Blockchain: Transaction(encryptedData)
-    Wallet->>Dapp: Result
+```typescript
+{
+  "id": Number,       // the request identifier
+  "jsonrpc": "2.0",
+  "result":  Object,  // result payload
+}
 ```
 
-### Queries :
+### Failure Response formatting
 
-Some queries might return user **private data**. In that case, **Wallet** will encrypt data with **DApp** public key before sending it.
-
-
-```mermaid
-sequenceDiagram
-    participant Dapp as DApp
-    participant Wallet as WalletApp
-    participant Blockchain as Archethic Blockchain
-
-    Dapp->>Wallet: Query, Dapp_public_key
-    Wallet->>Blockchain: Query
-    Blockchain->>Wallet: blockchainEncryptedData
-    Wallet->>Wallet: Decrypt blockchainEncryptedData using seed
-    Wallet->>Wallet: Encrypt data using Dapp_public_key
-    Wallet->>Dapp: encryptedData
+```typescript
+{
+  "id": Number,       // the request identifier
+  "jsonrpc": "2.0",
+  "error": {
+    "code": Number,   // Error code
+    "message": String | undefined, // Error description
+    "data": Object | undefined,    // Error data
+  },
+}
 ```
 
 
-# Mobile : DeepLink
+## Mobile : DeepLink
 
 | Platform | Support |
 |----------|:--:|
@@ -216,28 +94,90 @@ sequenceDiagram
 | Windows/Linux | ❌ |
 
 
-## Overview
+### Overview
 
 **WalletApp** handles DApp requests through an Https Deeplink endpoint.
 
 **DApp** implements a callback deeplink to receive requests responses.
 
-## Protocol (DApp <-> WalletApp)
 
-```mermaid
-sequenceDiagram
-    participant Dapp as DApp
-    participant Wallet as WalletApp
-    participant Blockchain
+### Deeplink codec
 
-    Dapp->>Wallet: HttpsDeeplink(Tx)
-    Wallet->>Wallet: sign(Tx)
-    Wallet->>Blockchain: send(SignedTx)
-    Wallet->>Dapp: Deeplink(SignedTx.address)
+Deeplink **messages** are appended to the deeplink URI. Because of that, there are limitations in the available formatting.
+
+To get it working, the **message** is encoded that way :
+
+
+
+```
+                     +--------------+   +------+   +--------+
+method_payload :     | Json Message |-> | gzip |-> | base64 |
+                     +--------------+   +------+   +--------+
+
+
+Deeplink Url : `aewallet://archethic.net/<method_name>/<method_payload>`
 ```
 
 
-## Limitations : Howto send heavy payloads (NFT creation) ?
+**Example :**
+
+```
+                     +--------------------------+      +----------------------------------------------------------------+
+method_payload :     | { "param1" : "a_value" } |----> | "H4sIAAAAAAAAA6tWUCpILErMNVRSsFJQSowvS8wpTVVSqAUAhIgKchgAAAA=" |
+                     +--------------------------+      +----------------------------------------------------------------+
+
+
+Deeplink Url : `aewallet://archethic.net/a_method/H4sIAAAAAAAAA6tWUCpILErMNVRSsFJQSowvS8wpTVVSqAUAhIgKchgAAAA=`
+
+```
+
+
+
+
+### Request formatting
+
+Requests payload are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/specification)** message.
+
+```typescript
+{
+  "id": Number,       // a unique client-generated integer identifying the request
+  "replyUrl": String, // Deeplink URL to which send the invokation result. This should be a Deeplink URL handled by the DApp.
+  "params": {
+    "origin": {
+      "name": Number,             // human readable identifier of the DApp
+      "url": String | undefined,   // URL of the DApp
+      "logo": Base64 | undefined,  // logo of the DApp 
+    },
+    "version": 2,         // Version of the DApp API
+    "payload": Object,  // Method parameters
+  }
+}
+```
+
+### Success Response formatting
+
+```typescript
+{
+  "id": Number,       // the request identifier
+  "result":  Object,  // result payload
+}
+```
+
+### Failure Response formatting
+
+```typescript
+{
+  "id": Number,       // the request identifier
+  "failure": {
+    "code": Number,   // Error code
+    "message": String | undefined, // Error description
+    "data": Object | undefined,    // Error data
+  },
+}
+```
+
+
+### Limitations : Howto send heavy payloads (NFT creation) ?
 
 ```mermaid
 sequenceDiagram
@@ -258,57 +198,208 @@ FileShare : Requires a platform-specific implementation
 - Web : https://developer.chrome.com/articles/web-share-target/ https://web.dev/patterns/files/receive-shared-files/ 
 - Android/iOS : https://pub.dev/packages/receive_sharing_intent 
 
-## Security
 
-Encryption of data transfered between DApp and WalletApp.
+# RPC Methods (draft)
 
+There are two kinds of methods : 
+ - one time call 
+ - subscriptions.
 
-```mermaid
-sequenceDiagram
-    participant Dapp as DApp
-    participant Wallet as WalletApp
+Subscriptions won't be available on Deeplink channel because of technical limitations.
 
-    Dapp->>Dapp: HasWalletPublicKey ? NO
-    Dapp->>Wallet: DeepLink(Handshake)
-    Wallet->>Wallet: Read WalletPublicKey from secure storage
-    Wallet->>Dapp: DeepLink(WalletPublicKey)
+## connect
 
-    Dapp->>Dapp: Stores WalletPublicKey
+Asks the right to ???? 
 
-    Dapp->>Wallet: Next operations can be encrypted
+### Request
+
+```typescript
+{
+  "TTL": Number,  // Duration of the permission, expressed in seconds.
+}
 ```
 
-1. WalletApp generates symmetric keys (stored in secure storage)
-2. DApp requests WalletApp public key (via Deeplink)
-3. WalletApp sends public key back using DApp Deeplink callback
-4. Next DApp->WalletApp communication's payloads are encrypted using WalletApp public key
+### Success Response
 
-# [deprecated solution] Wallet embedded Webview
-
-| Platform | Support |
-|----------|:--:|
-| Mobile (Web/App)              | ✅ |
-| MacOS/Windows/Linux (Web/App) | ✅ |
-
-## Overview
-
-**Wallet application** holds a "webview screen". Webview injects an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) implementations.
-
-That way, any visited website can interact with the user's wallet.
+```typescript
+// no payload in response success
+```
 
 
-# [deprecated solution] Wallet wrapped as a navigator extension
+## getEndpoint
 
-| Platform | Support |
-|----------|:--:|
-| Mobile (Web/App)              | ❌ |
-| MacOS/Windows/Linux (Web/App) | ✅ |
+Gets the endpoint URL used on AEWallet.
 
-## Overview
 
-**Wallet application** is built in a navigator extension (like **Metamask** does).
+### Request
+```typescript
+// no payload in request
+```
 
-## Drawbacks
+### Success Response
+```typescript
+{
+  "endpointUrl": String // Endpoint URL
+}
+```
 
-- Used libraries are not always *web compatible*. (e.g. issues with pointycastle)
-- Interaction with hardware (Yubikey, Ledger) is tricky
+## getServices
+
+Gets the services setup on AEWallet.
+
+### Request
+```typescript
+// No payload
+```
+
+### Success Response
+```typescript
+{
+  "services": [
+    {
+      "name": String,           // Service name
+      "genesisAddress": String, // Transaction chain genesis address  
+    }
+  ]
+}
+```
+
+## sendSingleTx
+
+Signs and sends a transaction.
+
+### Request
+```typescript
+{
+  "service": String | undefined,   // The emitting service name. I undefined, AEWallet will ask the user which account to use
+  "suffix": String | undefined,    // Derivation path suffix.
+  "transaction": Object,          // The transaction to send
+}
+```
+
+### Success Response
+```typescript
+{
+  "transactionAddress": String,  // Sent transaction address.
+  "nbConfirmations": Number,     // Number of received confirmations.
+  "maxConfirmations": Number,    // Max number of confirmations. 
+}
+```
+
+## sendMultipleTx
+
+Signs and sends a transaction.
+
+### Request
+```typescript
+{
+  "transactions": [
+    {
+      "service": String | undefined,   // The emitting service name. I undefined, AEWallet will ask the user which account to use
+      "suffix": String | undefined,    // Derivation path suffix.
+      "transaction": Object,          // The transaction to send
+    }
+  ]
+}
+```
+
+### Success Response
+```typescript
+{
+  "transactions": [
+    {
+      "transactionAddress": String,  // Sent transaction address.
+      "nbConfirmations": Number,     // Number of received confirmations.
+      "maxConfirmations": Number,    // Max number of confirmations. 
+    }
+  ]
+}
+```
+
+## signPayload
+
+Signs data with a service private key.
+If derivation path suffix is set, the private key is derived from [service private key], and [service derivation path + suffix].
+
+### Request
+```typescript
+{
+  "service": String | undefined,   // The emitting service name. I undefined, AEWallet will ask the user which account to use
+  "suffix": String | undefined,    // Derivation path suffix.
+  "payload": Object,              // The payload to sign
+}
+```
+
+### Success Response
+```typescript
+{
+  "signedPayload": String,  // Signed payload
+}
+```
+
+## decryptPayload
+
+Decrypts data with a service private key.
+If derivation path suffix is set, the private key is derived from [service private key], and [service derivation path + suffix].
+
+### Request
+```typescript
+{
+  "service": String,              // The service name.
+  "suffix": String | undefined,    // Derivation path suffix.
+  "encryptedPayload": Object,              // The encrypted payload
+}
+```
+
+### Success Response
+```typescript
+{
+  "clearPayload": String,  // Decrypted payload
+}
+```
+
+
+## accountSubscribe
+Subscribes to account changes.
+
+### Request
+```typescript
+{
+  "service": String // service name
+}
+```
+
+### Success Response
+```typescript
+{
+  "subscriptionId": Number  // Subscription id (required to unsubscribe)
+}
+```
+
+### Notification format
+
+Method name : `accountNotification`.
+```typescript
+{
+  "subscriptionId": Number,  // Subscription id
+  "account": {           // Undefined if account is removed
+    "name": String,         // account name
+    "balance": Number,      // balance
+    "lastAddress": String,  // last transaction address
+  } 
+}
+```
+## accountUnsubscribe
+Unsubscribes to account changes.
+
+### Request
+```typescript
+{
+  "subscriptionId": String // Subscription id.
+}
+```
+
+### Success Response
+```typescript
+// empty
+```
