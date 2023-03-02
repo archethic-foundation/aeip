@@ -2,7 +2,7 @@
 AEIP: 4
 Title: Decentralized app / Wallet communication protocol
 Author: Charly Caulet
-Status: Draft
+Status: Review
 Type: Standard Track
 Category: Interface
 Created: 2022-11-29
@@ -14,8 +14,7 @@ Created: 2022-11-29
 
 > Communication protocols depend on the host operating system. Proposals are listed here.
 
-
-----
+---
 
 # Transport layer
 
@@ -23,22 +22,22 @@ Created: 2022-11-29
 
 | Platform                      | Support |
 | ----------------------------- | :-----: |
-| Mobile (Web/App)              |    ❌    |
-| MacOS/Windows/Linux (Web/App) |    ✅    |
+| Mobile (Web/App)              |   ❌    |
+| MacOS/Windows/Linux (Web/App) |   ✅    |
 
 ### Overview
 
-- **Wallet app** provides a Websocket server using the **[JSON-RPC 2.0](https://www.jsonrpc.org/specification)**. 
+- **Wallet app** provides a Websocket server using the **[JSON-RPC 2.0](https://www.jsonrpc.org/specification)**.
   - Runs as the native desktop application.
-  - Provides a *notification zone* icon. Can be automatically run on computer startup.
+  - Provides a _notification zone_ icon. Can be automatically run on computer startup.
 - **Browser extension** injects a client in web pages (like [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193 does).
   - **Extension** proxies RPC to **Wallet app RPC server**.
   - Can check **Wallet app**'s RPC server readyness.
 
- ⚠️ ***Browser extension*** is NOT an **Archethic wallet** wrapped as a navigator extension. It is a distinct code base dedicated to **RPC bridge** problematics.
-
+⚠️ **_Browser extension_** is NOT an **Archethic wallet** wrapped as a navigator extension. It is a distinct code base dedicated to **RPC bridge** problematics.
 
 ### Request formatting
+
 Requests are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/specification)** message.
 
 ```typescript
@@ -50,7 +49,7 @@ Requests are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/specific
     "origin": {
       "name": Number,             // human readable identifier of the DApp
       "url": String | undefined,   // URL of the DApp
-      "logo": Base64 | undefined, // logo of the DApp 
+      "logo": Base64 | undefined, // logo of the DApp
     },
     "version": 2,         // Version of the DApp API
     "payload": Object | undefined,  // Method parameters
@@ -60,7 +59,7 @@ Requests are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/specific
 
 ### Success Response formatting
 
-Success response : 
+Success response :
 
 ```typescript
 {
@@ -84,15 +83,13 @@ Success response :
 }
 ```
 
-
 ## Mobile : DeepLink
 
 | Platform         | Support |
 | ---------------- | :-----: |
-| Mobile (Web/App) |    ✅    |
-| MacOS (Web/App)  |    ✅    |
-| Windows/Linux    |    ❌    |
-
+| Mobile (Web/App) |   ✅    |
+| MacOS (Web/App)  |   ✅    |
+| Windows/Linux    |   ❌    |
 
 ### Overview
 
@@ -100,14 +97,11 @@ Success response :
 
 **DApp** implements a callback deeplink to receive requests responses.
 
-
 ### Deeplink codec
 
 Deeplink **messages** are appended to the deeplink URI. Because of that, there are limitations in the available formatting.
 
 To get it working, the **message** is encoded that way :
-
-
 
 ```
                      +--------------+   +------+   +--------+
@@ -117,7 +111,6 @@ method_payload :     | Json Message |-> | gzip |-> | base64 |
 
 Deeplink Url : `<scheme>://<host>/<method_name>/<method_payload>`
 ```
-
 
 **Example :**
 
@@ -131,9 +124,6 @@ Deeplink Url : `scheme://host/a_method/H4sIAAAAAAAAA6tWUCpILErMNVRSsFJQSowvS8wpT
 
 ```
 
-
-
-
 ### Request formatting
 
 Requests payload are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/specification)** message.
@@ -146,7 +136,7 @@ Requests payload are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/
     "origin": {
       "name": String,               // Human readable identifier of the DApp
       "url": String | undefined,    // URL of the DApp
-      "logo": Base64 | undefined,   // Logo of the DApp 
+      "logo": Base64 | undefined,   // Logo of the DApp
     },
     "version": 2,                   // Version of the DApp API
     "payload": Object,              // Method parameters
@@ -190,25 +180,27 @@ sequenceDiagram
 ```
 
 This is a two steps operation :
+
 1. Share file to WalletApp using FileShare
 2. Once file is copied in the WalletApp documents directory, WalletApp triggers TxSignature Deeplink
 
 FileShare : Requires a platform-specific implementation
-- Web : https://developer.chrome.com/articles/web-share-target/ https://web.dev/patterns/files/receive-shared-files/ 
-- Android/iOS : https://pub.dev/packages/receive_sharing_intent 
 
+- Web : https://developer.chrome.com/articles/web-share-target/ https://web.dev/patterns/files/receive-shared-files/
+- Android/iOS : https://pub.dev/packages/receive_sharing_intent
 
 # RPC Methods (draft)
 
-There are two kinds of methods : 
- - one time call 
- - subscriptions.
+There are two kinds of methods :
+
+- one time call
+- subscriptions.
 
 Subscriptions won't be available on Deeplink channel because of technical limitations.
 
 ## connect
 
-Asks the right to ???? 
+Asks the right to ????
 
 ### Request
 
@@ -224,18 +216,18 @@ Asks the right to ????
 // no payload in response success
 ```
 
-
 ## getEndpoint
 
 Gets the endpoint URL used on AEWallet.
 
-
 ### Request
+
 ```typescript
 // no payload in request
 ```
 
 ### Success Response
+
 ```typescript
 {
   "endpointUrl": String // Endpoint URL
@@ -247,17 +239,19 @@ Gets the endpoint URL used on AEWallet.
 Gets the services setup on AEWallet.
 
 ### Request
+
 ```typescript
 // No payload
 ```
 
 ### Success Response
+
 ```typescript
 {
   "services": [
     {
       "name": String,           // Service name
-      "genesisAddress": String, // Transaction chain genesis address  
+      "genesisAddress": String, // Transaction chain genesis address
     }
   ]
 }
@@ -268,6 +262,7 @@ Gets the services setup on AEWallet.
 Signs and sends a transaction.
 
 ### Request
+
 ```typescript
 {
   "service": String | undefined,   // The emitting service name. I undefined, AEWallet will ask the user which account to use
@@ -277,11 +272,12 @@ Signs and sends a transaction.
 ```
 
 ### Success Response
+
 ```typescript
 {
   "transactionAddress": String,  // Sent transaction address.
   "nbConfirmations": Number,     // Number of received confirmations.
-  "maxConfirmations": Number,    // Max number of confirmations. 
+  "maxConfirmations": Number,    // Max number of confirmations.
 }
 ```
 
@@ -290,6 +286,7 @@ Signs and sends a transaction.
 Signs and sends a transaction.
 
 ### Request
+
 ```typescript
 {
   "transactions": [
@@ -303,13 +300,14 @@ Signs and sends a transaction.
 ```
 
 ### Success Response
+
 ```typescript
 {
   "transactions": [
     {
       "transactionAddress": String,  // Sent transaction address.
       "nbConfirmations": Number,     // Number of received confirmations.
-      "maxConfirmations": Number,    // Max number of confirmations. 
+      "maxConfirmations": Number,    // Max number of confirmations.
     }
   ]
 }
@@ -321,6 +319,7 @@ Signs data with a service private key.
 If derivation path suffix is set, the private key is derived from [service private key], and [service derivation path + suffix].
 
 ### Request
+
 ```typescript
 {
   "service": String | undefined,   // The emitting service name. I undefined, AEWallet will ask the user which account to use
@@ -330,6 +329,7 @@ If derivation path suffix is set, the private key is derived from [service priva
 ```
 
 ### Success Response
+
 ```typescript
 {
   "signedPayload": String,  // Signed payload
@@ -342,6 +342,7 @@ Decrypts data with a service private key.
 If derivation path suffix is set, the private key is derived from [service private key], and [service derivation path + suffix].
 
 ### Request
+
 ```typescript
 {
   "service": String,              // The service name.
@@ -351,17 +352,19 @@ If derivation path suffix is set, the private key is derived from [service priva
 ```
 
 ### Success Response
+
 ```typescript
 {
   "clearPayload": String,  // Decrypted payload
 }
 ```
 
-
 ## accountSubscribe
+
 Subscribes to account changes.
 
 ### Request
+
 ```typescript
 {
   "service": String // service name
@@ -369,6 +372,7 @@ Subscribes to account changes.
 ```
 
 ### Success Response
+
 ```typescript
 {
   "subscriptionId": Number  // Subscription id (required to unsubscribe)
@@ -378,6 +382,7 @@ Subscribes to account changes.
 ### Notification format
 
 Method name : `accountNotification`.
+
 ```typescript
 {
   "subscriptionId": Number,  // Subscription id
@@ -385,13 +390,16 @@ Method name : `accountNotification`.
     "name": String,         // account name
     "balance": Number,      // balance
     "lastAddress": String,  // last transaction address
-  } 
+  }
 }
 ```
+
 ## accountUnsubscribe
+
 Unsubscribes to account changes.
 
 ### Request
+
 ```typescript
 {
   "subscriptionId": String // Subscription id.
@@ -399,6 +407,7 @@ Unsubscribes to account changes.
 ```
 
 ### Success Response
+
 ```typescript
 // empty
 ```
