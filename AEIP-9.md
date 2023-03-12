@@ -4,7 +4,7 @@ Title: Standard NFT Metadata
 Author: Julien Leclerc <julien.leclerc05@protonmail.com>
 Type: Standard Track
 Category: AERC
-Require: AEIP-2
+Require: AEIP-2, AEIP-8
 Status: Draft
 Created: 2023-03-12
 ---
@@ -16,7 +16,7 @@ This AEIP defines a standardized JSON structure for the metadata of a non-fungib
 Currently, there is no standardized way of specifying the content of an NFT on Archethic. This creates inconsistency and potential confusion for users, and makes it difficult for developers to build NFT-related tools and applications. By defining a standardized JSON structure for NFT metadata that includes fields for specifying content, we can create a more consistent and user-friendly NFT ecosystem on Archethic.
 
 ## Specification
-The JSON structure for creating an NFT on the Archethic must adhere to the guidelines set forth by [AEIP-2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md).
+The JSON structure for creating an NFT on the Archethic must adhere to the guidelines set forth by [AEIP-2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md). It also requires to use the [AEIP-8](https://github.com/archethic-foundation/aeip/blob/main/AEIP-8.md) standard detection.
 
 In the case of a collection, the properties specified within the `properties` object are common to all NFTs in the collection.
 
@@ -44,6 +44,7 @@ Note that the content returned by `http` and `aeweb` may not be fixed and could 
   "type": "non-fungible",
   "name": "My collection",
   "symbol": "NFT",
+  "aeip": [2, 9],
   "properties": {
     "type_mime": "image/png", // type/mime for all the collection's NFTs
     "description": "This collection is an example"
