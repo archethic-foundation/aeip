@@ -2,7 +2,7 @@
 AEIP: 10
 Title: Soul Bounded Token
 Author: Samuel Manzanera <samuelmanzanera@protonmail.com>
-Status: Draft
+Status: Review
 Type: Standard Track
 Category: AERC
 Created: 2023-04-03
