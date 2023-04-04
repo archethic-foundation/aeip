@@ -102,8 +102,12 @@ The latter can be leveraged to send back the SBT to the issuer if the eligibilit
   "properties": {
     "eligibilityContract": "0fa....2b0" // Address of the smart contract chain attesting the eligibility
   },
-  "hooks": "if getTransaction('0fa....2b0').content != "eligible" do # In that case the smart contract is the SBT's token transaction chain
-    add_token_transfer(to: "0faa.....2b0", amount: 100_000_000, token_address: "0faa....2b0")
-  end"
+  "hooks": encodedHooks
 }
+```
+the encoded hook could represented in that form
+```elixir
+if getTransaction("0fa....2b0".content != "eligible" do
+  add_token_transfer(to: "000....000", amount: 100_000_000, token_address: "0faa....2b0") # The token is then burnt as not valid anymore
+end
 ```
