@@ -11,34 +11,34 @@ Created: 2023-04-03
 ## Abstract
 
 Web3 technology brought the usage of digital assets as a way to express our needs of transfers and associations into shared goals.
-Social, financials decentralized economics activities are now possible and express a way of freedom by building transferables relationships.
+Social, financials decentralized economics activities are now possible and express a way of freedom by building transferable relationships.
 
 [Decentralized Society](https://deliverypdf.ssrn.com/delivery.php?ID=132088086121078005091084073112109108125018001047091022000126083006124121094095123126045055003101126027111029072101098090069064009041023059084025027064118112120103091072003004001116020091083097006084086097119102120065084123008087120094106091015119066093&EXT=pdf&INDEX=TRUE)
-describe the concepts of Soul Bounded Tokens (SBT). These are non transferables tokens and are the keys to bring trust in networks to ensure origin and reputation of digital entities.
-Parties("souls" & communities) in DeSoc (Decentralized Society) allow to create goods and intelligence.
+describe the concepts of Soul Bounded Tokens (SBT). These are non-transferable tokens and are the keys to bring trust in networks to ensure origin and reputation of digital entities.
+Parties("souls" & communities) in DeSoc (Decentralized Society) allow creating goods and intelligence.
 
-By "soul" we mean any wallet/account holding non-transferable(but possibily revocable by the issuer) token.
+By "soul" we mean any wallet/account holding a non-transferable (but possibly revocable by the issuer) token.
 
-Therefore, SBT can be seen as affiliation, membership or credentials. They can be self-certified but the power comes when they become attested or issued by third-parties (companies, individuals, institutions).
+Therefore, SBT can be seen as affiliation, membership, or credentials. They can be self-certified, but the power comes when they become attested or issued by third-parties (companies, individuals, institutions).
 
-For example, Archethic Foundation could create a SBT to certify pre-investements of the first miners or signer of the [digital human rights](https://mainnet.archethic.net/explorer/transaction/0000C13373C96538B468CCDAB8F95FDC3744EBFA2CD36A81C3791B2A205705D9C3A2).
+For example, Archethic Foundation could create a SBT to certify pre-investments of the first miners or signer of the [digital human rights](https://mainnet.archethic.net/explorer/transaction/0000C13373C96538B468CCDAB8F95FDC3744EBFA2CD36A81C3791B2A205705D9C3A2).
 
-Furthermore, Blockchains technologies are great to trace the time a particular assets was created, for example a time when a work from a particular NFT was made.
+Furthermore, Blockchains technologies are great to trace the time a particular asset was created, for example a time when a work from a particular NFT was made.
 But SBT enables to trace the social provenance of this work.
 
-DAO & OnChain governance could rely on SBTs to give more power to Souls holding more reputable SBTs (Archethic On-Chain Code Proposal Voting), or issuing proof of personhood, etc..
-Indeed, proof of personhoop (PoP) could relies on SBT & Biometric to deliver uniqueness tokens.
+DAO & OnChain governance could rely on SBTs to give more power to Souls holding more reputable SBTs (Archethic On-Chain Code Proposal Voting), or issuing proof of personhood, etc.
+Indeed, proof of personhood (PoP) could rely on SBT & Biometric to deliver uniqueness tokens.
 
-On the other hand, revocables SBT can be useful in the case of representation of SBT as uncollateralized lending because the loans and credit are based on the reputation of the soul and could be revocable,
-like a non-seizable repuration collateral until they repay or give proof of payment.
+On the other hand, revocable SBT can be useful in the case of representation of SBT as un-collateralized lending because the loans and credit are based on the reputation of the soul and could be revocable,
+like a non-seizable reputation collateral until they repay or give proof of payment.
 
-While being nice, SBT still needs to solve some challenges, particurly privacy. For this reason there is multiple solutions:
+While being nice, SBT still needs to solve some challenges, particularly privacy. For this reason, there are multiple solutions:
 - Storing hash on-chain, with plain data stored off-chain
 - Usage of Zero-Knowledge proof protocols
 - Leverage [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/)
 
 
-This document is targetting the usage of SBT and its implementation on the Archethic's blockchain.
+This document is targeting the usage of SBT and its implementation on the Archethic's blockchain.
 This is based on the [token standard AEIP](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md) and also on the [UTXO's hooks AEIP](https://github.com/archethic-foundation/aeip/blob/main/AEIP-5.md).
 
 ## Specification
@@ -51,7 +51,8 @@ To be able to create a new SBT, the `token` transaction should be changed to sup
 }
 ```
 
-The token will leverage the UTXO's hooks/condition to prevent any further usage of the token by creating spending conditions of this asset.
+Because SBT are tokens which are non-transferable, we can then define conditions as UTXO to prevent its spending if we are not the issuer.
+The token will leverage the UTXO's hooks/condition to prevent any further usage of the asset.
 ```jsonc
 //Example of unspent output generated by the token transaction
 {
@@ -61,14 +62,17 @@ The token will leverage the UTXO's hooks/condition to prevent any further usage 
 }
 ```
 
+However, the SBT should get the possibility to be burnt if the receiver doesn't want to hold the asset anymore.
+
 ## Revocability
 
-While recovability is optional, few strategies can be implemented according of the usage and the complexity involved.
+While revocability is optional, few strategies can be implemented according to the usage and the complexity involved.
+Indeed, using a UTXO model, an issuer/smart contract cannot get back directly the token because it's not centralized in one place but transferred to the receiver.
 
 1. Expiration date
 
-A simple solution for the issuer would be to assign an expiration date for the token. 
-Hence application can rely on this attestation to check the validity of the SBT.
+A simple solution for the issuer would be to create an SBT in which the assets and its properties could have an expiration date. 
+Hence, applications can rely on this attestation to check the validity of the SBT.
 
 ```json
 {
@@ -81,12 +85,15 @@ Hence application can rely on this attestation to check the validity of the SBT.
 
 ```
 
-After some time, the issuer might decide to renew the SBT based on the claims of the receiver(ie. financial statements, administrative information updates, etc.)
+After some time, the issuer might decide to renew the SBT based on the claims of the receiver(i.e. financial statements, administrative information updates, etc.).
 
 2. Smart Contract / TransactionChain
 
-A smart contract or a transaction chain can reference the lifecycle of a SBT, allowing or disallowing the usage of a SBT.
-The UTXO's hook can be leveraged to send back the SBT to the issuer if the eligibility is not matched for any receiver's transaction.
+A smart contract or a transaction chain can manage the lifecycle of an SBT, allowing or disallowing the usage of an SBT.
+The SBT should reference a pointer to the smart contract's address.
+
+Application can check the eligibility of the SBT by calling the smart contract, or the SBT can be self-revocable using UTXO's hook.
+The latter can be leveraged to send back the SBT to the issuer if the eligibility is not matched for any receiver's transaction or to the burning address.
 
 ```jsonc
 {
@@ -100,6 +107,3 @@ The UTXO's hook can be leveraged to send back the SBT to the issuer if the eligi
   end"
 }
 ```
-
-
-
