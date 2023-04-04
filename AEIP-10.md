@@ -107,7 +107,7 @@ The latter can be leveraged to send back the SBT to the issuer if the eligibilit
 ```
 the encoded hook could represented in that form
 ```elixir
-if getTransaction("0fa....2b0".content != "eligible" do
+if getTransaction("0fa....2b0").content != "eligible" do
   add_token_transfer(to: "000....000", amount: 100_000_000, token_address: "0faa....2b0") # The token is then burnt as not valid anymore
 end
 ```
