@@ -10,15 +10,15 @@ Created: 2023-04-04
 
 ## Abstract
 
-This document aims to describe a way to leverage the standard [https://www.w3.org/TR/vc-data-model/](W3C Verifiable Credentials) on Archethic Blockchain.
+This document aims to describe a way to leverage the standard [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) on Archethic Blockchain.
 They are credentials (attestations) of subjects (person, organizations, etc.) to be secury cryptographically, respecting the privacy and being verifiable.
 
-This come along with new standard and ideas such as [https://github.com/archethic-foundation/aeip/blob/main/AEIP-10.md](Soul Bounded Tokens (SBTs)) in the Web3 to build decentralized identity
+This come along with new standard and ideas such as [Soul Bounded Tokens (SBT)](https://github.com/archethic-foundation/aeip/blob/main/AEIP-10.md) in the Web3 to build decentralized identity
 but yet issued by recognized entities while being verifiable and usable in our daily life.
 
 Verifiable Credentials are information related to a subject and certified/attested by an issuer.
 
-Those entities are usually represented as [https://www.w3.org/TR/did-core/](Decentralized Identifiers) to be cryptographically trusted and verified.
+Those entities are usually represented as [Decentralized Identifiers](https://www.w3.org/TR/did-core/) to be cryptographically trusted and verified.
 
 The verifiable credential then hold the entire attestation which can be disclosed or not according to the subject's volontee.
 
