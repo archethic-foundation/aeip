@@ -4,7 +4,7 @@ Title: Standard Specification Detection
 Author: Julien Leclerc <julien.leclerc05@protonmail.com>
 Type: Standard Track
 Category: AERC
-Status: Review
+Status: Final
 Created: 2023-02-28
 ---
 

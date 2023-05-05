@@ -5,7 +5,7 @@ Author: Julien Leclerc <julien.leclerc05@protonmail.com>
 Type: Standard Track
 Category: AERC
 Require: AEIP-2, AEIP-8
-Status: Draft
+Status: Final
 Created: 2023-03-12
 ---
 
