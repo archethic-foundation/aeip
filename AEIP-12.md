@@ -1,11 +1,11 @@
 ---
-AEIP: 9
+AEIP: 12
 Title: Keychain - bookmarks
 Author: Sylvain Séramy <sylvain@archethic.net>
 Type: Standard Track
 Category: AERC
 Require: none
-Status: Draft
+Status: Review
 Created: 2023-06-15
 ---
 
