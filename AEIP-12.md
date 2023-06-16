@@ -58,7 +58,7 @@ Notes:
 ### Example
 ```jsonc
 {
-    "did:archethic:keychainAddress": 
+    "did:archethic:0100e3d7f666fd8cb43d6918c15458a10a05acc622c972ee70dd91d90c712892e241": 
     {
       "bookmarks": {
         "version": 1,
@@ -68,7 +68,7 @@ Notes:
         }
       }
     },
-    "did:archethic:keychainAddress#serviceName1":
+    "did:archethic:0100e3d7f666fd8cb43d6918c15458a10a05acc622c972ee70dd91d90c712892e241#serviceName1":
     {
       "bookmarks": {
         "version": 1,
@@ -77,7 +77,7 @@ Notes:
         }
       }
     },
-		"did:archethic:keychainAddress#serviceName2":
+		"did:archethic:0100e3d7f666fd8cb43d6918c15458a10a05acc622c972ee70dd91d90c712892e241#serviceName2":
     {
       "bookmarks": {
         "version": 1,
