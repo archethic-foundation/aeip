@@ -4,7 +4,7 @@ Title: AEWeb - Publication Status
 Author: Bastien CHAMAGNE <bastien@archethic.net>
 Type: Standard Track
 Category: AERC
-Status: Draft
+Status: Review
 Created: 2023-06-26
 ---
 
