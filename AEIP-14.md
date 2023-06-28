@@ -4,7 +4,7 @@ Title: Stateful UTXO
 Author: Samuel Manzanera <samuelmanzanera@protonmail.com>
 Status: Review
 Type: Standard Track
-Category: AERC
+Category: Core
 Created: 2023-06-27
 ---
 
