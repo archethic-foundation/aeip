@@ -81,7 +81,7 @@ So we would have to provide a new structure and new version:
          to: "01df.....", 
          action: "vote",
          parameters: ["Mr.X"]
-      ]]
+      }]
    }  
 }
 ```
