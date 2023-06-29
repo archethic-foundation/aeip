@@ -24,7 +24,7 @@ Because the AEIPs are maintained as text files in a versioned repository, their 
 - **Draft**: the first formally tracked stage of an AEIP in development. An AEIP is merged by an AEIP Editor into the AEIP repository when properly formatted.
 - **Review**: The AEIP is marked as ready for and requesting Peer Review.
 - **Final**: The AEIP represents the final standard. A Final AEIP exists in a state of finality and should only be updated to correct errata and add non-normative clarifications.
-- **Active**: A special status for AEIPs that are designed to be continually updated and not reach a state of finality. This includes most notably [AEIP-1](https://github.com/archethic-foundation/aeip/blob/main/AEIP-1.md).
+- **Active**: A special status for AEIPs that are designed to be continually updated and not reach a state of finality. This includes most notably [AEIP-1](/AEIP-01.md).
 - **Stagnant**: Any AEIP in Draft or Review if inactive for a period of 6 months or greater is moved to Stagnant. An AEIP may be resurrected from this state by Authors or AEIP Editors through moving it back to Draft.
 
 # AEIP types

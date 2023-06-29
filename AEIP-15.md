@@ -26,8 +26,8 @@ In summary, icons for fungible tokens or collections of NFTs are essential for i
 
 ## Specification
 The JSON structure for creating a token on the Archethic must adhere to the guidelines set forth by 
-- [AEIP-2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md).
-- [AEIP-9](https://github.com/archethic-foundation/aeip/blob/main/AEIP-9.md).
+- [AEIP-2](/AEIP-02.md).
+- [AEIP-9](/AEIP-09.md).
 
 
 This AEIP introduces the following new fields to define icon
@@ -97,7 +97,7 @@ These informations are in the same level of symbol informations:
 }
 ```
 
-Finally, like precise in the [AEIP-8](https://github.com/archethic-foundation/aeip/blob/main/AEIP-8.md), if icon is declared in the json structure, developer should add `15` in the `aeip` field to be compliant with the Standard Specification Detection.
+Finally, like precise in the [AEIP-8](/AEIP-08.md), if icon is declared in the json structure, developer should add `15` in the `aeip` field to be compliant with the Standard Specification Detection.
 
 ## Rationale
 This standardization of the JSON structure for token's metadata on Archethic provides a consistent and universal format for the metadata associated with token's icon.

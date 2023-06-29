@@ -18,13 +18,13 @@ The standard contains the following:
 
 # Motivation
 
-Since [AEIP-2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md), tokens are created using the content part of a token transaction.  
+Since [AEIP-2](/AEIP-02.md), tokens are created using the content part of a token transaction.  
 The content value must follow some specifications using JSON format with specific attributes.  
 In more general case, the content part of a transaction is a free place where any kind of value can be written, we need to identify if the content of a transaction follow some AEIP specifications.
 
 # Specification
 
-According to [AEIP-2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md), this specification keeps using JSON format and adds a specific attribute which defines the AEIP standards implemented for a transaction.
+According to [AEIP-2](/AEIP-02.md), this specification keeps using JSON format and adds a specific attribute which defines the AEIP standards implemented for a transaction.
 
 The new attribute `aeip` is added in the root of the JSON structure. It's an array of positive integer where each value represent an AEIP number.
 
@@ -74,7 +74,7 @@ try {
 This standard is not applicable only for token specification like AEIP-2 but can be used for all kind of standard that uses a JSON format.
 
 It is recommended that future AEIP require this AEIP-8 if possible.  
-[AEIP-2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md) does not require this AEIP standard but it's strongly recommended to use it.
+[AEIP-2](/AEIP-02.md) does not require this AEIP standard but it's strongly recommended to use it.
 
 ## How to use this standard
 

@@ -10,13 +10,13 @@ Created: 2023-03-12
 ---
 
 ## Abstract
-This AEIP defines a standardized JSON structure for the metadata of a non-fungible tokens (NFTs) on the Archethic blockchain. This AEIP builds on top of [AEIP-2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md), which defines the basic fields required for creating NFTs on Archethic. The new standardized JSON structure includes additional fields for specifying the content of the NFT, including its name, description, and various types of content references.
+This AEIP defines a standardized JSON structure for the metadata of a non-fungible tokens (NFTs) on the Archethic blockchain. This AEIP builds on top of [AEIP-2](/AEIP-02.md), which defines the basic fields required for creating NFTs on Archethic. The new standardized JSON structure includes additional fields for specifying the content of the NFT, including its name, description, and various types of content references.
 
 ## Motivation
 Currently, there is no standardized way of specifying the content of an NFT on Archethic. This creates inconsistency and potential confusion for users, and makes it difficult for developers to build NFT-related tools and applications. By defining a standardized JSON structure for NFT metadata that includes fields for specifying content, we can create a more consistent and user-friendly NFT ecosystem on Archethic.
 
 ## Specification
-The JSON structure for creating an NFT on the Archethic must adhere to the guidelines set forth by [AEIP-2](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md). It also requires to use the [AEIP-8](https://github.com/archethic-foundation/aeip/blob/main/AEIP-8.md) standard detection.
+The JSON structure for creating an NFT on the Archethic must adhere to the guidelines set forth by [AEIP-2](/AEIP-02.md). It also requires to use the [AEIP-8](/AEIP-08.md) standard detection.
 
 In the case of a collection, the properties specified within the `properties` object are common to all NFTs in the collection.
 
