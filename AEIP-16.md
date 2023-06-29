@@ -79,7 +79,7 @@ So we would have to provide a new structure and new version:
    "data": {
       "recipients": [{
          to: "01df.....", 
-         function: "vote",
+         action: "vote",
          parameters: ["Mr.X"]
       ]]
    }  
