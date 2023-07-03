@@ -66,22 +66,26 @@ A default allowed complexity has to be defined to be consumed on each instructio
 
 ### API
 
-Node would have to expose a new endpoint to access the read of those external function.
+To ease the exposure of services and the usuabilty, we transform our REST API in to JSON-RPC which will serve more the purpose of our HTTP API oriented actions vs resources.
+
+So methods abouts contract exposure could be available as:
 ```elixir
    # With 0 arity: 
-   POST /api/contract/02fa...../funName
+   POST /api/rpc
    {
-      "result": 144
-      # Or
-      "result": {
-         "key": "value"
-      }
+       "jsonrpc": "2.0", 
+       "method": "contract_fun", 
+       "params": ["functionName"], 
+       "id": 1
    }
 
    ### With N arity
-   POST /api/contract/02fa...../funName?arg1=val1&arg2=val2
+   POST /api/rpc
    {
-      "result": ["A", "B", "C"]
+      "jsonrpc": "2.0", 
+      "method": "contract_fun",
+      "params": ["functionName", param1, param2], 
+      "id": 1
    }
 ```
 
