@@ -18,15 +18,20 @@ This works because the first thing AEWeb does is fetch the latest reference tran
 
 The node needs two modifications:
 
-1. Add a new schema for AEWeb transaction
+1. Add a new sub schema for AEWeb transaction
 1. The controller which serves the AEWeb content should check the status and act accordingly
 
-### New schema
+## New sub schema
 ```json
 {
     "type": "object",
     "description": "Reference tx of an unpublished website",
     "properties": {
+        "aeip": {
+            "type": "array",
+            "items": { "type": "number" },
+            "description": "Supported AEIPs"
+        },
         "aewebVersion": {
             "type": "number",
             "exclusiveMinimum": 0,
@@ -34,9 +39,7 @@ The node needs two modifications:
         },
         "publicationStatus": {
             "type": "string",
-            "enum": [
-            "UNPUBLISHED"
-            ]
+            "enum": [ "UNPUBLISHED" ]
         }
     },
     "required": [
@@ -46,6 +49,31 @@ The node needs two modifications:
     "additionalProperties": false
 }
 ```
+
+This sub schema is used in a `oneOf` that also contains the two existing sub schemas:
+
+```json
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {...},
+    "oneOf": [
+        {"$ref": "#/definitions/aewebRefTxPublished"},
+        {"$ref": "#/definitions/aewebRefTxUnpublished"},
+        {"$ref": "#/definitions/aewebDataTx"},
+    ]
+}
+```
+
+#### Example of a web_hosting transaction's content to unpublish a website
+
+```json
+{
+    "aeip": [8, 13],
+    "aewebVersion": 1,
+    "publicationStatus": "UNPUBLISHED"
+}
+```
+
 
 ### Controller logic
 
