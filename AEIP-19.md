@@ -33,7 +33,7 @@ To support this capability, we would have to extend the JSON used in the token m
 I propose to add a new field named  `recipients`, being a list of addresses and amount where the tokens will be send and will be the first targets to receive the tokens in automated-way.
 
 
-```json
+```jsonc
 {
   "aeip": [2, 8, 19],
   "supply": 300000000, // Representing 3 tokens in BigInt
