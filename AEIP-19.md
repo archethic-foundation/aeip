@@ -14,7 +14,7 @@ Created: 2023-07-03
 Since the [AEIP-02](/AEIP-02.md), we have the capability to mint tokens.
 During the transaction validation, the miners will create and assign new UTXOs to this transaction, to be consumed later.
 
-This AEIP aims to extend the minting scope to be able to send in the same times not only the transaction's UTXO but to other recipients.
+This AEIP aims to extend the minting scope to be able to send in the same time not only the transaction's UTXO but to other recipients.
 
 Indeed, often dApps or token creators want to be able to mint and send at the same.
 
