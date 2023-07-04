@@ -68,14 +68,14 @@ A default allowed complexity has to be defined to be consumed on each instructio
 
 To ease the exposure of services and the usuabilty, we transform our REST API in to JSON-RPC which will serve more the purpose of our HTTP API oriented actions vs resources.
 
-So methods abouts contract exposure could be available as:
+So methods about contract exposure could be available as:
 ```elixir
    # With 0 arity: 
    POST /api/rpc
    {
        "jsonrpc": "2.0", 
        "method": "contract_fun", 
-       "params": ["functionName"], 
+       "params": ["addressContract", "functionName"], 
        "id": 1
    }
 
@@ -84,7 +84,7 @@ So methods abouts contract exposure could be available as:
    {
       "jsonrpc": "2.0", 
       "method": "contract_fun",
-      "params": ["functionName", param1, param2], 
+      "params": ["addressContract", "functionName", param1, param2], 
       "id": 1
    }
 ```
