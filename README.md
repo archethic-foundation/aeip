@@ -14,23 +14,23 @@ With those document we aim to create standards for Archethic network implementat
 
 ## Current AEIPs
 
-| Number                                                                  | Title                                                                                                         | Type      | Category       | Status   |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | --------- | -------------- | -------- |
-| [1](./AEIP-01.md)  | [AEIP Purpose and Guidelines](./AEIP-01.md)              |           | Process        | Active   |
-| [2](./AEIP-02.md)  | [Token standard](./AEIP-02.md)                           | AERC      | Standard Track | Final    |
-| [3](./AEIP-03.md)  | [Deeplinking](./AEIP-03.md)                              | AERC      | Standard Track | Stagnant |
-| [4](./AEIP-04.md)  | [Decentralized App & Wallet communication](./AEIP-04.md) | Interface | Standard Track | Final    |
-| [5](./AEIP-05.md)  | [Programmable / Smart UTXOs](./AEIP-05.md)               | Core      | Standard Track | Review   |
-| [6](./AEIP-06.md)  | [Keychain - Standardization](./AEIP-06.md)               | AERC      | Standard Track | Review   |
-| [8](./AEIP-08.md)  | [Standard Specification Detection](./AEIP-08.md)         | AERC      | Standard Track | Final    |
-| [9](./AEIP-09.md)  | [Standard NFT Metadata](./AEIP-09.md)                    | AERC      | Standard Track | Final    |
-| [10](./AEIP-10.md) | [Soul Bounded Token](./AEIP-10.md)                       | AERC      | Standard Track | Review   |
-| [11](./AEIP-11.md) | [Verifiable Credential](./AEIP-11.md)                    | AERC      | Standard Track | Draft    |
-| [12](./AEIP-12.md) | [Keychain - Bookmarks](./AEIP-12.md)                     | AERC      | Standard Track | Review   |
-| [13](./AEIP-13.md) | [AEWeb - Publication Status](./AEIP-13.md)               | AERC      | Standard Track | Review   |
-| [14](./AEIP-14.md) | [Stateful UTXO](./AEIP-14.md)                            | Core      | Standard Track | Review   |
-| [15](./AEIP-15.md) | [Token standard - icons](./AEIP-15.md)                   | AERC      | Standard Track | Draft    |
-| [16](./AEIP-16.md) | [Smart Contract Named Actions](./AEIP-16.md)                   | Core/Interface      | Standard Track | Review    |
-| [17](./AEIP-17.md) | [Smart Contract Functions](./AEIP-17.md)                   | Core/Interface      | Standard Track | Review    |
-| [18](./AEIP-18.md) | [Increase token supply](./AEIP-18.md)                   | AERC      | Standard Track | Review    |
-| [19](./AEIP-19.md) | [Token minting's recipients](./AEIP-19)                   | AERC      | Standard Track | Review    |
+| Number             | Title                                                    | Type           | Category       | Status   |
+| ------------------ | -------------------------------------------------------- | -------------- | -------------- | -------- |
+| [1](./AEIP-01.md)  | [AEIP Purpose and Guidelines](./AEIP-01.md)              |                | Process        | Active   |
+| [2](./AEIP-02.md)  | [Token standard](./AEIP-02.md)                           | AERC           | Standard Track | Final    |
+| [3](./AEIP-03.md)  | [Deeplinking](./AEIP-03.md)                              | AERC           | Standard Track | Stagnant |
+| [4](./AEIP-04.md)  | [Decentralized App & Wallet communication](./AEIP-04.md) | Interface      | Standard Track | Final    |
+| [5](./AEIP-05.md)  | [Programmable / Smart UTXOs](./AEIP-05.md)               | Core           | Standard Track | Review   |
+| [6](./AEIP-06.md)  | [Keychain - Standardization](./AEIP-06.md)               | AERC           | Standard Track | Review   |
+| [8](./AEIP-08.md)  | [Standard Specification Detection](./AEIP-08.md)         | AERC           | Standard Track | Final    |
+| [9](./AEIP-09.md)  | [Standard NFT Metadata](./AEIP-09.md)                    | AERC           | Standard Track | Final    |
+| [10](./AEIP-10.md) | [Soul Bounded Token](./AEIP-10.md)                       | AERC           | Standard Track | Review   |
+| [11](./AEIP-11.md) | [Verifiable Credential](./AEIP-11.md)                    | AERC           | Standard Track | Draft    |
+| [12](./AEIP-12.md) | [Keychain - Bookmarks](./AEIP-12.md)                     | AERC           | Standard Track | Review   |
+| [13](./AEIP-13.md) | [AEWeb - Publication Status](./AEIP-13.md)               | AERC           | Standard Track | Review   |
+| [14](./AEIP-14.md) | [Stateful UTXO](./AEIP-14.md)                            | Core           | Standard Track | Review   |
+| [15](./AEIP-15.md) | [Token standard - icons](./AEIP-15.md)                   | AERC           | Standard Track | Draft    |
+| [16](./AEIP-16.md) | [Smart Contract Named Actions](./AEIP-16.md)             | Core/Interface | Standard Track | Review   |
+| [17](./AEIP-17.md) | [Smart Contract Functions](./AEIP-17.md)                 | Core/Interface | Standard Track | Review   |
+| [18](./AEIP-18.md) | [Increase token supply](./AEIP-18.md)                    | AERC           | Standard Track | Review   |
+| [19](./AEIP-19.md) | [Token minting's recipients](./AEIP-19.md)               | AERC           | Standard Track | Review   |
