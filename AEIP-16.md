@@ -34,7 +34,7 @@ The actions block of the smart contract would leverage a new parameter: `on` for
 
 Here some examples:
 ```elixir
-actions triggered_by: transaction, on: "vote" do
+actions triggered_by: transaction, on: "vote(candidate)" do
   # Do something to insert the vote
 end
 
@@ -46,6 +46,11 @@ end
 This parameter will accept a string as value to identify the action block to execute.
 
 > The behavior should be backward compatible, meaning we can still use the straight trigger transaction without the `on` parameter.
+
+If the function supports arity (any arguments), the arguments should be present in the `on` parameter.
+Hence, the given variables will directly accessible by the action block in the scope.
+
+This also means the variables bounded to the parameters should not be assignable, risking to loose the value passed from the incoming transaction. 
 
 Once ingested, the validation node could delegate the function call to the interpreter which would execute the specific action block.
 
