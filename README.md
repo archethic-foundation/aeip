@@ -27,7 +27,7 @@ With those document we aim to create standards for Archethic network implementat
 | [10](./AEIP-10.md) | [Soul Bounded Token](./AEIP-10.md)                       | AERC           | Standard Track | Review   |
 | [11](./AEIP-11.md) | [Verifiable Credential](./AEIP-11.md)                    | AERC           | Standard Track | Draft    |
 | [12](./AEIP-12.md) | [Keychain - Bookmarks](./AEIP-12.md)                     | AERC           | Standard Track | Review   |
-| [13](./AEIP-13.md) | [AEWeb - Publication Status](./AEIP-13.md)               | AERC           | Standard Track | Review   |
+| [13](./AEIP-13.md) | [AEWeb - Publication Status](./AEIP-13.md)               | AERC           | Standard Track | Final    |
 | [14](./AEIP-14.md) | [Stateful UTXO](./AEIP-14.md)                            | Core           | Standard Track | Review   |
 | [15](./AEIP-15.md) | [Token standard - icons](./AEIP-15.md)                   | AERC           | Standard Track | Draft    |
 | [16](./AEIP-16.md) | [Smart Contract Named Actions](./AEIP-16.md)             | Core/Interface | Standard Track | Review   |

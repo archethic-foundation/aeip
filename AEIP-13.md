@@ -5,6 +5,7 @@ Author: Bastien CHAMAGNE <bastien@archethic.net>
 Type: Standard Track
 Category: AERC
 Status: Review
+Requires: AEIP-08
 Created: 2023-06-26
 ---
 
