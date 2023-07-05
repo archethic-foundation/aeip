@@ -57,9 +57,6 @@ Once ingested, the validation node could delegate the function call to the inter
 The validation node could also assert if the function is not present in the contract and therefore returns an error. 
 This would simplify the smart contract code with not need to whitelist/blacklist the function to call in the condition transaction block.
 
-Because function can have parameters, we have to add new field in the transaction constants to idenfify the list of parameters. 
-This field can be named: `transaction.call_parameters`
-
 This field should also be present in the `condition transaction` block to be able to whitelist/blacklist the parameters.
 
 ### Transaction's structure
