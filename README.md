@@ -34,3 +34,4 @@ With those document we aim to create standards for Archethic network implementat
 | [17](./AEIP-17.md) | [Smart Contract Functions](./AEIP-17.md)                 | Core/Interface | Standard Track | Review   |
 | [18](./AEIP-18.md) | [Increase token supply](./AEIP-18.md)                    | AERC           | Standard Track | Review   |
 | [19](./AEIP-19.md) | [Token minting's recipients](./AEIP-19.md)               | AERC           | Standard Track | Review   |
+| [20](./AEIP-20.md) | [Smart Contract fetch](./AEIP-20.md)                     | AERC           | Standard Track | Draft    |
