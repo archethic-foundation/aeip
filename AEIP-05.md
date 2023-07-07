@@ -4,7 +4,7 @@ Title: Programmable / Smart UTXOs (Hooks)
 Author: Samuel Manzanera <samuel@uniris.io>
 Type: Standard Track
 Category: AERC
-Status: Review
+Status: Stagnant
 Created: 2022-12-15
 ---
 
