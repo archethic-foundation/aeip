@@ -65,6 +65,8 @@ condition triggered_by: transaction, on: vote, as: [
 ]
 ```
 
+> As for the actions, the parameters in the function arity would be accessible in the condition's block
+
 To make the condition extendable by simple or advanced user, we propose to have capability to define expectation of condition with: `as` keyword or direct code returning a boolean to accept the transaction using `do` keyword.
 
 ```elixir
