@@ -71,7 +71,7 @@ A new format in transaction content can be used. This format follows the same ru
 }
 ```
 
-`allow_mint` is a boolean (true / false), default value is false if property is not set
+`allow_mint` is a boolean (true / false), this field is required.
 
 This new property is allowed only for fungible token (`type: "fungible"`), since a non fungible token cannot be referenced
 
