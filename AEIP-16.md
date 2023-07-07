@@ -1,7 +1,7 @@
 ---
 AEIP: 16
 Title: Smart Contract Named Actions
-Author: Samuel Manzanera <samuelmanzanera@protonmail.com>
+Authors: Samuel Manzanera <samuelmanzanera@protonmail.com>, Julien Leclerc <julien.leclerc05@protonmail.com>, Bastien Chamagne <bastien@archethic.net>
 Status: Review
 Type: Standard Track
 Category: Core/Interface
@@ -34,16 +34,16 @@ The actions block of the smart contract would leverage a new parameter: `on` for
 
 Here some examples:
 ```elixir
-actions triggered_by: transaction, on: "vote(candidate)" do
+actions triggered_by: transaction, on: vote(candidate) do
   # Do something to insert the vote
 end
 
-actions triggered_by: transaction, on: "maintain" do
+actions triggered_by: transaction, on: maintain do
   # Do something to maintain the contract
 end
 ```
 
-This parameter will accept a string as value to identify the action block to execute.
+This parameter will accept a function name as value to identify the action block to execute.
 
 > The behavior should be backward compatible, meaning we can still use the straight trigger transaction without the `on` parameter.
 
@@ -57,7 +57,28 @@ Once ingested, the validation node could delegate the function call to the inter
 The validation node could also assert if the function is not present in the contract and therefore returns an error. 
 This would simplify the smart contract code with not need to whitelist/blacklist the function to call in the condition transaction block.
 
-This field should also be present in the `condition transaction` block to be able to whitelist/blacklist the parameters.
+The condition field will also be adpated to support named action branching.
+
+```elixir
+condition triggered_by: transaction, on: vote, as: [
+  content: "hello"
+]
+```
+
+To make the condition extendable by simple or advanced user, we propose to have capability to define expectation of condition with: `as` keyword or direct code returning a boolean to accept the transaction using `do` keyword.
+
+```elixir
+condition triggered_by: transaction, on: vote(x, y) do
+   Regex.match?(x, ....) and Regex.match?(y, ....)
+end
+```
+This notion of extension could also be applied to block actions to simplify flow
+
+```elixir
+actions triggered_by: transaction, on: upgrade, as: [
+    code: transaction.content
+]
+```
 
 ### Transaction's structure
 
