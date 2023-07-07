@@ -4,7 +4,7 @@ Title: Token minting's recipients
 Author: Samuel Manzanera <samuelmanzanera@protonmail.com>
 Type: Standard Track
 Category: AERC
-Require: AEIP-02, AEIP-08
+Require: AEIP-08
 Status: Review
 Created: 2023-07-03
 ---
@@ -54,7 +54,7 @@ I propose to add a new field named  `recipients`, being a list of addresses and 
 
 ## Minting
 
-During the transaction validation, the miners will mint the tokens and create the following UTXOs as described in the [AEIP-02](/AEIP-02.md)
+During the transaction validation, the miners will mint the tokens and create the following UTXOs according to the token's definition.
 
 If the `recipients` field is not empty, the validation nodes would also create transaction movements and therefore reducing the supply in the created UTXOs.
 
