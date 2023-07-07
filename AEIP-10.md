@@ -5,6 +5,7 @@ Author: Samuel Manzanera <samuelmanzanera@protonmail.com>
 Status: Review
 Type: Standard Track
 Category: AERC
+Require: AEIP-02, AEIP-08, AEIP-05
 Created: 2023-04-03
 ---
 
@@ -39,7 +40,7 @@ While being nice, SBT still needs to solve some challenges, particularly privacy
 
 
 This document is targeting the usage of SBT and its implementation on the Archethic's blockchain.
-This is based on the [token standard AEIP](https://github.com/archethic-foundation/aeip/blob/main/AEIP-2.md) and also on the [UTXO's hooks AEIP](https://github.com/archethic-foundation/aeip/blob/main/AEIP-5.md).
+This is based on the [token standard AEIP](https://github.com/archethic-foundation/aeip/blob/main/AEIP-02.md) and also on the [UTXO's hooks AEIP](https://github.com/archethic-foundation/aeip/blob/main/AEIP-05.md).
 
 ## Specification
 
