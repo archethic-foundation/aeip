@@ -1,7 +1,7 @@
 ---
 AEIP: 21
 Title: Improve concurrency of transaction chains
-Author: Samuel Manzanera <samuelmanzanera@protonmail.com>
+Author: Samuel Manzanera <samuelmanzanera@protonmail.com>, Sebastien Dupont <seb@archethic.net>, Julien Leclerc <julien.leclerc05@protonmail.com>
 Type: Standard Track
 Category: Core
 Status: Draft
@@ -36,6 +36,7 @@ For this reason, we need to find a better way to handle concurrency for independ
     - to avoid deadlock
     - to avoid false positive (subject to concurrency issue as well)
 - We would not like to disrupt the usage of the chains by retrying until one pass (like Cardano)
+- We want to reduce as much as possible the bandwidth cost to replicate transaction
 
 ## Proposition
 
@@ -44,34 +45,60 @@ In the YellowPaper, the principle identifies the solution to target the last tra
 For this, we can use the **genesis pool** as:
 - pivot of synchronization
 - concurrency signalization
-- incoming queue
 
-Because the transaction in chain are serialized, we can take this concurrency flaw and turns into something great to bring order in chain synchronization.
+Because the transaction in chain are serialized, we can take this concurrency flaw and turns into order for chain synchronization, using the genesis pool
 
-Indeed the genesis pool would hold one pending transaction at a time, helping others chains to synchronize with it.
+### Genesis pool
 
-The genesis pool will act as notification center and router/ordering for new incoming transactions.
+Each chain has a origin or genesis transaction's address which helps to identify the unicity of a chain.
 
-This would also help validators to identify whether the incoming transaction is still valid according to the pending transaction on the recipient chain.
+This chain can be notified about new validated transactions and also new incoming transactions.
 
-Also, they will be able to identify the last transaction's address resolved to be included in the validation stamp.
+To support a more efficient storage and bandwidth cost, this genesis would not have to store and forward the incoming transaction.
+Instead, genesis pool storage nodes can hold a set of entries to identify the spent or unspent inputs for this chain.
 
-Finally, the pool can hold the incoming transactions to be dequeued once the transaction is validated.
+This pool will act as notification center or ordering for new incoming transactions helping validators to get the right inputs ledger.
+
+To do so, the genesis pools will receive validation stamp from the validation nodes and build the input ledger:
+- with incoming transaction: it will list the movements towards the chain and extract them as unspent outputs
+- with chain's transaction: it will list the spent inputs and update the unspent outputs
+
+The genesis pool should ensure an input cannot be ingested if it's already spent to avoid double spending.
+
+Along with the validation stamp, the genesis pool will get the transaction's summary and replication attestations to ensure the transaction is valid according
+to the 1/3 threshold of replica confirmations.
+
+### Validation
+
+During the validation, the nodes will not request anymore the previous storage nodes to get the unspent outputs but will request the genesis pool to get the current unspent inputs.
+
+The validation stamp would need to be adapted to support a more determinist approach where the consumed inputs will be stored.
+This will help genesis pools later to identify spent inputs and prevent them to be used for further transactions.
+
+Unspent outputs in the validation stamp will be a consolidated view with the list of unspent inputs + new generated unspent outputs (for example for UCO) at the time of the transaction
+
+> To get the accurate and live balance, we would need to request the genesis pool which hold the entire input ledger.
+
+### Overview
+ 
 
 ```mermaid
 graph LR
-  Alice5_Pool --> TxAlice(tx to: Bob1)
+  Alice5_Pool --> TxAlice(tx Alice6 to: Bob1)
 	TxAlice --> ValidatorTx6(Validator Tx6)
-	ValidatorTx6 --> Alice6_Pool
-  ValidatorTx6 --> | Request genesis | Bob1_Pool
-  ValidatorTx6 -->| Request last address for stamp| Bob0_Pool
-  ValidatorTx6 -->| Request validation from the pending tx | Bob0_Pool
-  ValidatorTx6 -->| Queue Alice6 to Bob0| Bob0_Pool
-	Bob0_Pool ---> Bob1_Pool
-  Bob1_Pool --> TxBob(tx)
+  ValidatorTx6 --> | 1. Notify pending transaction | Alice0_Pool
+  ValidatorTx6 --> | 2. Request UTXO | Alice0_Pool
+  ValidatorTx6 --> | 3. Request genesis | Bob1_Pool
+	ValidatorTx6 --> | 4. Replicate tx | Alice6_Pool
+  ValidatorTx6 --> | 5. Send stamp + confirmations | Bob0_Pool
+  ValidatorTx6 --> | 6. Send stamp + confirmations | Alice0_Pool
+  Alice0_Pool --> | 7. Update Ledger |Alice0_Pool
+
+  Bob1_Pool --> TxBob(tx - Bob2)
   TxBob --> ValidatorTxBob(Validator Bob2)
-  ValidatorTxBob --->| Notify pending transaction | Bob0_Pool
-  ValidatorTxBob ---> Bob2_Pool
-  ValidatorTxBob --->|Notify replication| Bob0_Pool
-  Bob0_Pool -->| Notify Alice6 | Bob2_Pool
+  ValidatorTxBob --> | 1. Notify pending transaction | Bob0_Pool
+  ValidatorTxBob --> | 2. Request UTXO | Bob0_Pool
+  ValidatorTxBob ---> | 3. Replicate tx | Bob2_Pool
+  ValidatorTxBob ---> | 4. Send stamp + confirmations | Bob0_Pool
+  Bob0_Pool --> | 5. Update Ledger |Bob0_Pool
 ```
