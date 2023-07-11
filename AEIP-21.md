@@ -1,7 +1,7 @@
 ---
 AEIP: 21
 Title: Improve concurrency of transaction chains
-Author: Samuel Manzanera <samuelmanzanera@protonmail.com>, Sebastien Dupont <seb@archethic.net>, Julien Leclerc <julien.leclerc05@protonmail.com>
+Author: Samuel Manzanera Sebastien Dupont <seb@archethic.net>, Samuel Manzanera <samuelmanzanera@protonmail.com>, Julien Leclerc <julien.leclerc05@protonmail.com>
 Type: Standard Track
 Category: Core
 Status: Draft
