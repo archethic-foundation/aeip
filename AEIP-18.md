@@ -1,6 +1,6 @@
 ---
 AEIP: 18
-Title: Increase token supply
+Title: Increase AEIP-2 token supply
 Author: Julien Leclerc <julien.leclerc05@protonmail.com>
 Type: Standard Track
 Category: Standard Track
