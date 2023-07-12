@@ -4,7 +4,7 @@ Title: Improve concurrency of transaction chains
 Author: Sebastien Dupont <seb@archethic.net>, Samuel Manzanera <samuelmanzanera@protonmail.com>, Julien Leclerc <julien.leclerc05@protonmail.com>
 Type: Standard Track
 Category: Core
-Status: Draft
+Status: Review
 Created: 2023-07-06
 ---
 

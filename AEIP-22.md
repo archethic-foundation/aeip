@@ -4,7 +4,7 @@ Title: Smart Contract upgradability
 Author: Samuel Manzanera <samuelmanzanera@protonmail.com>
 Type: Standard Track
 Category: AERC
-Status: Draft
+Status: Review
 Created: 2023-07-12
 ---
 
