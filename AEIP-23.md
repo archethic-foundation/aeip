@@ -2,7 +2,7 @@
 AEIP: 4
 Title: Decentralized app / Wallet communication securisation protocol
 Author: Charly Caulet
-Status: Draft
+Status: Review
 Type: Standard Track
 Category: Interface
 Created: 2023-08-30
