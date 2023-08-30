@@ -69,6 +69,7 @@ sequenceDiagram
         end
     end
 
+    dapp ->> user: operation result
 ```
 
 ## Problématique 3 : Stocker les données de manière sécurisée sur le web
