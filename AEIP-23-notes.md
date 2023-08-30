@@ -30,41 +30,43 @@ sequenceDiagram
 
     user ->> dapp: initiates operation
 
-    rect rgba(125, 125, 125, 25)
-    Note over dapp,wallet: ECDH handshake
-    dapp --> dapp: 🔑 generates session key pair :<br>(DAppPubKey, DAppPrivKey)
-    dapp ->> wallet: create session (DAppPubKey)
-    wallet --> wallet: 🔑 generates session key pair :<br>(WalletPubKey, WalletPrivKey)
-    wallet --> wallet: 🔐 Generates shared AES Key<br>(WalletPrivKey, DAppPubKey)
-    wallet ->> dapp: WalletPubKey
-    dapp --> dapp: 🔐 Generates shared AES Key <br>(DAppPrivKey, WalletPubKey)
+    opt If no DApp session established 
+        rect rgba(125, 125, 125, 25)
+            Note over dapp,wallet: ECDH handshake
+            dapp --> dapp: 🔑 generates session key pair :<br>(DAppPubKey, DAppPrivKey)
+            dapp ->> wallet: create session (DAppPubKey)
+            wallet --> wallet: 🔑 generates session key pair :<br>(WalletPubKey, WalletPrivKey)
+            wallet --> wallet: 🔐 Generates shared AES Key<br>(WalletPrivKey, DAppPubKey)
+            wallet ->> dapp: WalletPubKey
+            dapp --> dapp: 🔐 Generates shared AES Key <br>(DAppPrivKey, WalletPubKey)
+        end
+
+        rect rgba(125, 125, 125, 25)
+            Note over user,wallet: DApp impersonation challenge
+            dapp --> dapp: generates challenge 
+            dapp ->> wallet: AES(challenge)
+            dapp ->> user: display challenge
+            wallet --> wallet: decrypt(AES(challenge))
+            wallet ->> user: Is challenge same as the one displayed on DApp ?
+
+            alt Challenge validated by user
+                wallet ->> dapp: Session established 👍<br>
+            else Challenge rejected by user
+                wallet ->> dapp: Session rejected ❌
+            end
+        end
     end
 
     rect rgba(125, 125, 125, 25)
-    Note over user,wallet: DApp impersonation challenge
-    dapp --> dapp: generates challenge 
-    dapp ->> wallet: AES(challenge)
-    dapp ->> user: display challenge
-    wallet --> wallet: decrypt(AES(challenge))
-    wallet ->> user: Is challenge same as the one displayed on DApp ?
-
-    alt Challenge validated by user
-        wallet ->> dapp: Session established 👍<br>(SessionId)
-    else Challenge rejected by user
-        wallet ->> dapp: Session rejected ❌
-    end
-    end
-
-    rect rgba(125, 125, 125, 25)
-    Note over user,wallet: Secured operation
-    dapp --> wallet: {sessionId: SessionId, payload: AES(RPC operation)}
-    wallet --> wallet: Checks session validity<br>Gets session related AES key
-    alt Session is valid
-    wallet --> wallet: performs operation
-    wallet ->> dapp: operation result
-    else Session is not valid
-    wallet ->> dapp: operation rejected ❌
-    end
+        Note over user,wallet: Secured operation
+        dapp ->> wallet: {sessionId: DAppPubKey, payload: AES(RPC operation)}
+        wallet --> wallet: Checks session validity<br>Gets session related AES key
+        alt Session is valid
+            wallet --> wallet: performs operation
+            wallet ->> dapp: operation result
+        else Session is not valid
+            wallet ->> dapp: operation rejected ❌
+        end
     end
 
 ```
