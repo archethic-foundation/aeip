@@ -2,7 +2,7 @@
 
 Archethic Improvement Proposals (AEIPs) describe standards for the Archethic network, including core protocol specifications, client APIs, and any standards.
 
-**Before you initiate a pull request**, please read the [AEIP-1](AEIP-1.md) process document.
+**Before you initiate a pull request**, please read the [AEIP-1](AEIP-01.md) process document.
 
 Once your first PR is merged, this will be merged into a draft AEIPs.
 
