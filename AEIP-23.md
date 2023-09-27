@@ -23,6 +23,7 @@ This AEIP attempts to solve Man in the middle attacks and related issues :
 A malicious app attempts a **Man In The Middle** attack to modify the recipient wallet address.
 
 The end user receives the confirmation request on **AEWallet**. If **user** is not focused, he could miss the **recipient address** fraud.
+
 ---
 
 # Solution : ECDH + Challenge
