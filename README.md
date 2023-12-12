@@ -37,5 +37,5 @@ With those document we aim to create standards for Archethic network implementat
 | [20](./AEIP-20.md) | [Smart Contract fetch](./AEIP-20.md)                      | AERC           | Standard Track | Review   |
 | [21](./AEIP-21.md) | [Improve concurrency of transaction chains](./AEIP-21.md) | Core           | Standard Track | Review   |
 | [22](./AEIP-22.md) | [Smart Contract upgradability](./AEIP-22.md)              | AERC           | Standard Track | Review   |
-| [22](./AEIP-23.md) | [DApp / Wallet comm. securisation protocol](./AEIP-23.md) | Interface      | Standard Track | Draft    |
-
+| [23](./AEIP-23.md) | [DApp / Wallet comm. securisation protocol](./AEIP-23.md) | Interface      | Standard Track | Draft    |
+| [24](./AEIP-24.md) | [Efficient Validation and Aggregation of Signatures in AE Tx](./AEIP-24.md) | Core      | Standard Track | Draft    |
