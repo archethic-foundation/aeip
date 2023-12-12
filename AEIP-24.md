@@ -83,6 +83,8 @@ Step 8: Aggregated signatures are computed and replace individual transaction si
 **Step 8:** The Storage Node along with Cross Validation and Coordinator node will calculate their respective aggregate signatures and replace the validated transaction signatures with the aggregated signatures. This is the final step of aggregating signatures and replacing the individual transaction signatures with these aggregated signatures is a method of compacting and finalizing the validation process, which is efficient and secure. All the nodes verify the aggregated signatures.<br>
 
 # Conclusion
-
 The current transaction validation method in Archethic is not scalable and requires significant network resources. This proposal aims to streamline the process, ensuring robust security and efficiency. The proposed solution not only saves storage space but also accelerates the data verification process on the Archethic network, which is crucial for maintaining high throughput and scalability as the network grows. The proposed changes are backwards compatible as they enhance the validation process without altering the underlying transaction structure.
+
+# Extras
+To implement this signature aggregation into Transaction Chains currently BLS Signature Schemas, Schnorr's Signature Schemas (CoSi and MuSig) are explored.
 
