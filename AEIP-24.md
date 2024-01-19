@@ -88,6 +88,15 @@ The current transaction validation method in Archethic is not scalable and requi
 # BLS Signature Schemas
 In the context of the Archethic blockchain, BLS (Boneh-Lynn-Shacham) signature aggregation offers a transformative approach to handling transactions and signatures. Archethic, aiming to be a highly scalable and efficient blockchain, faces challenges typical of decentralized networks, such as the need to manage large volumes of transaction data efficiently. BLS signature aggregation directly addresses these challenges.
 
+## Facts about BLS Signature Schemas
+Why BLS? BLS has the special property of pairing.
+Why pairing? Pairing allows signatures to be aggregated.
+Why Aggregation? Although verification of BLS signature is resource intensive and expensive compared to ECDSA due to pairing operations, the benefits are:
+**Time**: verify all attestations in a single signature verification operation (verify N signatures with just two pairing and trivial elliptic curve point additions).
+**Space**: scale down N bytes of all signatures to 1/N bytes of aggregate signature (approximately and ideally).
+The benefits accrue when the number of signatures is more significant.
+
+
 Here's how it works in the Archethic ecosystem:
 1. **Individual Signing**: Nodes on the Archethic network sign their transactions with their private keys, creating individual BLS signatures. This step is analogous to standard digital signing processes but prepares for a more efficient aggregation.
 
