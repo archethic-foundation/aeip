@@ -82,9 +82,23 @@ Step 8: Aggregated signatures are computed and replace individual transaction si
 
 **Step 8:** The Storage Node along with Cross Validation and Coordinator node will calculate their respective aggregate signatures and replace the validated transaction signatures with the aggregated signatures. This is the final step of aggregating signatures and replacing the individual transaction signatures with these aggregated signatures is a method of compacting and finalizing the validation process, which is efficient and secure. All the nodes verify the aggregated signatures.<br>
 
-# Conclusion
+# Technology Conclusion
 The current transaction validation method in Archethic is not scalable and requires significant network resources. This proposal aims to streamline the process, ensuring robust security and efficiency. The proposed solution not only saves storage space but also accelerates the data verification process on the Archethic network, which is crucial for maintaining high throughput and scalability as the network grows. The proposed changes are backwards compatible as they enhance the validation process without altering the underlying transaction structure.
 
-# Extras
-To implement this signature aggregation into Transaction Chains currently BLS Signature Schemas, Schnorr's Signature Schemas (CoSi and MuSig) are explored.
+# BLS Signature Schemas
+In the context of the Archethic blockchain, BLS (Boneh-Lynn-Shacham) signature aggregation offers a transformative approach to handling transactions and signatures. Archethic, aiming to be a highly scalable and efficient blockchain, faces challenges typical of decentralized networks, such as the need to manage large volumes of transaction data efficiently. BLS signature aggregation directly addresses these challenges.
+
+Here's how it works in the Archethic ecosystem:
+1. **Individual Signing**: Nodes on the Archethic network sign their transactions with their private keys, creating individual BLS signatures. This step is analogous to standard digital signing processes but prepares for a more efficient aggregation.
+
+2. **Signature Aggregation**: These individual BLS signatures from numerous transactions are aggregated into a single, compact signature. This aggregation is a powerful feature unique to BLS signatures, allowing the Archethic blockchain to condense what would normally be a large amount of signature data into a manageable size. This process is crucial for maintaining a lean and efficient blockchain.
+
+3. **Efficient Verification**: The aggregated signature can be verified against a combined set of public keys corresponding to the private keys used in the signing process. This allows for the quick and secure verification of multiple transactions simultaneously, greatly enhancing the transaction throughput and reducing the computational load on the network.
+
+By implementing BLS signature aggregation, the Archethic blockchain significantly enhances its scalability and efficiency. This approach reduces the storage and bandwidth requirements, a vital aspect for a blockchain designed to handle a high volume of transactions. Additionally, the inherent security of BLS signatures ensures the integrity and trustworthiness of transactions on the network. In summary, BLS signature aggregation aligns perfectly with Archethic's vision of a scalable, secure, and efficient blockchain network.
+
+Results after BLS Signature Implementation:
+![image](https://github.com/archethic-foundation/aeip/assets/75987671/28a994c1-2cf0-4837-9538-e8c368364477)
+
+The implementation to this is done in Rust!
 
