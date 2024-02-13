@@ -1,7 +1,7 @@
 ---
 AEIP: 25
 Title: Merkel Trees to secure the validation stamp, unspent inputs and consumed outputs 
-Author: Akshay Kumar KANDHI MANJUNATHA REDDY <akshaykumarkm9@gmail.com>
+Author: Akshay Kumar KANDHI MANJUNATHA REDDY <akshaykumarkm9@gmail.com> ; Samuel Manzanera <samuelmanzanera@protonmail.com>
 Type: Standard Track
 Category: Core
 Status: Review
