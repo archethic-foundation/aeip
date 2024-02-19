@@ -38,13 +38,14 @@ This AEIP aims propose a way to achieve it by creating a standard.
 To support code's update, we propose to create a well-defined named actions (specific function called by transaction): `code_update(new_code)` with a condition to accept the transaction to mutate to the smart contract code.
 
 ```elixir
-condition triggered_by: transaction, on: code_update(new_code) do
+condition triggered_by: transaction, on: code_update(new_code), as: [
    previous_public_key: (
        previous_address = Chain.get_previous_address(transaction.previous_public_key)
        # We check if the chain's origin of this code update transaction is the one authorized
        Chain.get_genesis_address(previous_address) == 0x.........
    )
-end
+]
+
 actions triggered_by: transaction, on: code_update(new_code) do
    Contract.set_code(new_code)
 end
