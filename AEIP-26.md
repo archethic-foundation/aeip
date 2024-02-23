@@ -3,7 +3,7 @@ AEIP: 26
 Title: Optimizing Blockchain Integrity: Threshold Signatures and Dynamic Hypergeometric Distribution
 Author: Akshay Kumar KANDHI MANJUNATHA REDDY <akshaykumarkm9@gmail.com>
 Type: Core
-Status:
+Status: Draft
 Created: 2024-02-13
 ---
 
@@ -37,6 +37,13 @@ The ARCH Consensus uses this formula to determine the probability of achieving a
 Dynamic Adaptation of Node Selection
 To adapt to varying levels of network threat, ARCH Consensus dynamically adjusts n, the number of nodes sampled for the consensus process. This is achieved through a linear interpolation based on the current malicious rate M:
 ![image](https://github.com/archethic-foundation/aeip/assets/75987671/077f09fa-b7f0-4855-9e57-1a628f978897)
+
+To be more precise, <br>
+n(min) is the number of nodes when malicious rate is 51% <br>
+n(max) is the number of nodes when malicious rate is 90% <br>
+M is the malicious rate, this rate is adjusted based on the network conditions and the default value is 0 <br>
+M(min) and M(max) are initially set to 0, but are adjusted based on the network conditions <br>
+
 
 Empirical Analysis and Graphical Representation
 The performance of the ARCH Consensus was subjected to rigorous simulation under varying conditions of network integrity. The graph below illustrates the minimum number of nodes required for different malicious rates at a fixed tolerance level:
