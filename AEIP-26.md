@@ -1,6 +1,6 @@
 ---
 AEIP: 26
-Title: Optimizing Blockchain Integrity: Threshold Signatures and Dynamic Hypergeometric Distribution
+Title: Dynamic Hypergeometric Distribution
 Author: Akshay Kumar KANDHI MANJUNATHA REDDY <akshaykumarkm9@gmail.com>
 Type: Core
 Status: Draft
