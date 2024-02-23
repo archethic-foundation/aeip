@@ -39,3 +39,5 @@ With those document we aim to create standards for Archethic network implementat
 | [22](./AEIP-22.md) | [Smart Contract upgradability](./AEIP-22.md)              | AERC           | Standard Track | Review   |
 | [23](./AEIP-23.md) | [DApp / Wallet comm. securisation protocol](./AEIP-23.md) | Interface      | Standard Track | Draft    |
 | [24](./AEIP-24.md) | [Efficient Validation and Aggregation of Signatures in AE Tx](./AEIP-24.md) | Core      | Standard Track | Draft    |
+| [25](./AEIP-25.md) | [Merkel Trees to secure the validation stamp, unspent inputs and consumed outputs](./AEIP-25.md) | Core      | Standard Track | Draft    |
+| [26](./AEIP-26.md) | [Efficient Validation and Aggregation of Signatures in AE Tx](./AEIP-26.md) | Core      | Standard Track | Draft    |
