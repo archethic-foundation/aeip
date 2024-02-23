@@ -31,7 +31,7 @@ The Mathematical Underpinning: Hypergeometric Distribution
 ## Hypergeometric Distribution
 
 The hypergeometric distribution serves as the statistical backbone of ARCH Consensus. It's described by the probability mass function:
-![image](https://github.com/archethic-foundation/aeip/assets/75987671/e61aa2d2-ef18-4120-aef6-8e1ac46261c4)
+$$P[X = k] = \sum_{k=1}^{p} \binom{N_1}{k} \times \frac{\binom{N-N_1}{n-k}}{\binom{N}{n}}\$$
 
 Where:
 * N = Total number of nodes.
@@ -44,7 +44,16 @@ The ARCH Consensus uses this formula to determine the probability of achieving a
 ## Dynamic Adaptation of Node Selection
 
 To adapt to varying levels of network threat, ARCH Consensus dynamically adjusts n, the number of nodes sampled for the consensus process. This is achieved through a linear interpolation based on the current malicious rate M:
-![image](https://github.com/archethic-foundation/aeip/assets/75987671/077f09fa-b7f0-4855-9e57-1a628f978897)
+
+$$ n = n_{min} + (n_{max} - n_{min}) \times \left( \frac{M - M_{min}}{M_{max} - M_{min}} \right) $$
+
+Where:
+- `n_{min}` = Minimum nodes at lowest malicious rate.
+- `n_{max}` = Maximum nodes at highest malicious rate.
+- `M` = Current malicious rate.
+- `M_{min}` = Lowest observed malicious rate.
+- `M_{max}` = Highest observed malicious rate.
+
 
 To be more precise:
 * n(min) is the number of nodes using the hypergeometric distribution of N when malicious rate is 51%
@@ -56,7 +65,8 @@ To be more precise:
 ## Empirical Analysis and Graphical Representation
 
 The performance of the ARCH Consensus was subjected to rigorous simulation under varying conditions of network integrity. The graph below illustrates the minimum number of nodes required for different malicious rates at a fixed tolerance level:
-![image](https://github.com/archethic-foundation/aeip/assets/75987671/05ac8ca0-f740-4857-a54b-6997585f92dc)
+
+**Minimum Number of Nodes Required = f(N, M, Tolerance)**
 
 The Hypergeometric distribution was developed to simulate the minimum number of nodes necessary to counteract the influence of malicious nodes within a network. 
 
