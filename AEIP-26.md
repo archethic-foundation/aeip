@@ -48,18 +48,11 @@ To adapt to varying levels of network threat, ARCH Consensus dynamically adjusts
 $$ n = n_{min} + (n_{max} - n_{min}) \times \left( \frac{M - M_{min}}{M_{max} - M_{min}} \right) $$
 
 Where:
-- `n_{min}` = Minimum nodes at lowest malicious rate.
-- `n_{max}` = Maximum nodes at highest malicious rate.
-- `M` = Current malicious rate.
-- `M_{min}` = Lowest observed malicious rate.
-- `M_{max}` = Highest observed malicious rate.
-
-
-To be more precise:
-* n(min) is the number of nodes using the hypergeometric distribution of N when malicious rate is 51%
-* n(max) is the number of nodes using the hypergeometric distribution of N when malicious rate is 90%
-* M is the malicious rate, this rate is adjusted based on the network conditions and the default value is 0
-* M(min) and M(max) are initially set to 0, but are adjusted based on the network conditions
+- `n_{min}` = number of nodes using the hypergeometric distribution of N using the lowest malicious rate (51%)
+- `n_{max}` = number of nodes using the hypergeometric distribution of N using the highest malicious rate (90%)
+- `M` = Current malicious rate. This rate is adjusted based on the network conditions and the default value is 0
+- `M_{min}` = Lowest observed malicious rate (initially set to 0 and adjusted based on the network conditions)
+- `M_{max}` = Highest observed malicious rate (initially set to 0 and adjusted based on the network conditions)
 
 
 ## Empirical Analysis and Graphical Representation
