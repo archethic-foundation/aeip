@@ -5,7 +5,7 @@ Author: Samuel Manzanera <samuelmanzanera@protonmail.com>
 Type: Standard Track
 Category: AERC
 Require: AEIP-08
-Status: Review
+Status: Final
 Created: 2023-07-03
 ---
 
@@ -19,6 +19,7 @@ This AEIP aims to extend the minting scope to be able to send in the same time n
 Indeed, often dApps or token creators want to be able to mint and send at the same.
 
 Without this approach we need to make two transactions:
+
 - one to mint and get the UTXOS
 - one to send/spend the tokens created
 
@@ -26,12 +27,11 @@ So this AEIP proposes a way to mitigate this problem.
 
 # Specification
 
-To support this capability, we would have to extend the JSON used in the token minting definition  used in `token` transaction's type.
+To support this capability, we would have to extend the JSON used in the token minting definition used in `token` transaction's type.
 
 ## Definition
 
-I propose to add a new field named  `recipients`, being a list of addresses and amount where the tokens will be send and will be the first targets to receive the tokens in automated-way.
-
+I propose to add a new field named `recipients`, being a list of addresses and amount where the tokens will be send and will be the first targets to receive the tokens in automated-way.
 
 ```jsonc
 {
@@ -43,10 +43,10 @@ I propose to add a new field named  `recipients`, being a list of addresses and 
   "properties": {},
   "recipients": [
     {
-       "to": "0f1fd....",
-       "amount": 100000000 // Representing 1 token in BigInt
-    }
-  ]
+      "to": "0f1fd....",
+      "amount": 100000000, // Representing 1 token in BigInt
+    },
+  ],
 }
 ```
 
@@ -59,6 +59,7 @@ During the transaction validation, the miners will mint the tokens and create th
 If the `recipients` field is not empty, the validation nodes would also create transaction movements and therefore reducing the supply in the created UTXOs.
 
 For example with the previous token definition above, the validation nodes would create the following validation's stamp:
+
 ```jsonc
 {
   "unspent_outputs": [
@@ -97,4 +98,3 @@ This additional fee is then seen as any other transfers - more recipients == mor
 This specification is backward-compatible as it does not affect the former token definitions.
 
 In order to support mint recipients, developers or creators would have to create new tokens or increase the tokens supply to support this feature.
-

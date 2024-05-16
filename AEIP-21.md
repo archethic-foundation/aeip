@@ -4,7 +4,7 @@ Title: Improve concurrency of transaction chains
 Author: Sebastien Dupont <seb@archethic.net>, Samuel Manzanera <samuelmanzanera@protonmail.com>, Julien Leclerc <julien.leclerc05@protonmail.com>
 Type: Standard Track
 Category: Core
-Status: Review
+Status: Final
 Created: 2023-07-06
 ---
 
@@ -14,15 +14,15 @@ Archethic relies on TransactionChain using multiple independent chains through t
 
 Whereas this works well when some you are evolving your chain and the recipient chains don’t evolve so much, a concurrency issue occurs when both chains evolve quite frequently, for example a smart contract.
 
-Because Archethic’s transaction chain relies on the principle#3/Remark 1 from the YP: 
+Because Archethic’s transaction chain relies on the principle#3/Remark 1 from the YP:
+
 > The address of any transaction in the same chain could be used as
-> a destination address, it is not necessary to specify the last transaction in the chain. 
-> 
+> a destination address, it is not necessary to specify the last transaction in the chain.
+>
 > (The nodes will automatically replicate the transaction on the storage pool associated with the last
 > transaction in the chain).
-> 
+>
 > -- <cite>YellowPaper (page 9)</cite>
-
 
 Hence, if the last address of the recipients is also moving , if your are doing a transaction towards its chain, your outputs might be lost resulting in lost funds or lost smart contract calls.
 
@@ -33,8 +33,8 @@ For this reason, we need to find a better way to handle concurrency for independ
 ## Assomptions
 
 - We would not like to have to lock chains
-    - to avoid deadlock
-    - to avoid false positive (subject to concurrency issue as well)
+  - to avoid deadlock
+  - to avoid false positive (subject to concurrency issue as well)
 - We would not like to disrupt the usage of the chains by retrying until one pass (like Cardano)
 - We want to reduce as much as possible the bandwidth cost to replicate transaction
 
@@ -43,6 +43,7 @@ For this reason, we need to find a better way to handle concurrency for independ
 In the YellowPaper, the principle identifies the solution to target the last transaction of the chain, but we can still leverage this remark and introduces a intermediary level of synchronization before in order to notify the last address.
 
 For this, we can use the **genesis pool** as:
+
 - pivot of synchronization
 - concurrency signalization
 
@@ -60,6 +61,7 @@ Instead, genesis pool storage nodes can hold a set of entries to identify the sp
 This pool will act as notification center or ordering for new incoming transactions helping validators to get the right inputs ledger.
 
 To do so, the genesis pools will receive validation stamp from the validation nodes and build the input ledger:
+
 - with incoming transaction: it will list the movements towards the chain and extract them as unspent outputs
 - with chain's transaction: it will list the spent inputs and update the unspent outputs
 
@@ -80,7 +82,6 @@ Unspent outputs in the validation stamp will be a consolidated view with the lis
 > To get the accurate and live balance, we would need to request the genesis pool which hold the entire input ledger.
 
 ### Overview
- 
 
 ```mermaid
 graph LR

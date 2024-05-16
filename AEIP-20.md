@@ -5,17 +5,20 @@ Author: Bastien Chamagne <bastien@archethic.net>
 Type: Standard Track
 Category: AERC
 Require: none
-Status: Review
+Status: Final
 Created: 2023-07-06
 ---
 
 ## Abstract
+
 This AEIP defines new functions available in the Smart Contract Library that developers may use to fetch web services. For technical reasons, these functions must only be used to read data.
 
 ## Motivation
+
 A Smart Contract may require to fetch off-chain data to do some work. For example the Archethic Bridge might use this to ensure a smart contract on an other blockchain is created. Some contracts could query the weather and act on it. The use cases are infinite.
 
 ## Specification
+
 A new module `Http` is added to the Smart Contract Library. In this module there would be two functions defined: `fetch/1` and `fetch_many/1` which send one (or multiple) GET request(s) to the URL(s) provided.
 
 This module is not accessible on the `condition` blocks.
@@ -63,6 +66,7 @@ end
 ## Limitations
 
 For performance and security reasons we impose a set of rules:
+
 - Only GET requests.
 - No request body nor headers.
 - The endpoint must be HTTPS.
