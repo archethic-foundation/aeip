@@ -2,7 +2,7 @@
 AEIP: 24
 Title: Efficient Validation and Aggregation of Signatures in Archethic Transactions
 Author: Akshay Kumar KANDHI MANJUNATHA REDDY <akshay@archethic.net>
-Status: Draft
+Status: Review
 Type: Standards Track
 Category: Core
 Created: 2023-12-12
