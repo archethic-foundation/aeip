@@ -41,3 +41,4 @@ With those document we aim to create standards for Archethic network implementat
 | [24](./AEIP-24.md) | [Efficient Validation and Aggregation of Signatures in AE Tx](./AEIP-24.md)                      | Core           | Standard Track | Review   |
 | [25](./AEIP-25.md) | [Merkel Trees to secure the validation stamp, unspent inputs and consumed outputs](./AEIP-25.md) | Core           | Standard Track | Review   |
 | [26](./AEIP-26.md) | [Dynamic Hypergeometric Distribution](./AEIP-26.md)                                              | Core           | Standard Track | Draft    |
+| [27](./AEIP-27.md) | [WebAssembly support for smart contracts](./AEIP-27.md)                                          | Core           | Standard Track | Draft    |
