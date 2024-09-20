@@ -35,10 +35,10 @@ This AEIP aims propose a way to achieve it by creating a standard.
 
 # Specification
 
-To support code's update, we propose to create a well-defined named actions (specific function called by transaction): `code_update(new_code)` with a condition to accept the transaction to mutate to the smart contract code.
+To support code's upgrade, we propose to create a well-defined named actions (specific function called by transaction): `code_upgrade(new_code)` with a condition to accept the transaction to mutate to the smart contract code.
 
 ```elixir
-condition triggered_by: transaction, on: code_update(new_code), as: [
+condition triggered_by: transaction, on: code_upgrade(new_code), as: [
    previous_public_key: (
        previous_address = Chain.get_previous_address(transaction.previous_public_key)
        # We check if the chain's origin of this code update transaction is the one authorized
@@ -46,7 +46,7 @@ condition triggered_by: transaction, on: code_update(new_code), as: [
    )
 ]
 
-actions triggered_by: transaction, on: code_update(new_code) do
+actions triggered_by: transaction, on: code_upgrade(new_code) do
    Contract.set_code(new_code)
 end
 ```
@@ -58,20 +58,20 @@ This could be a master account like in a DAO system or any multisignature contra
 
 Because smart contract upgradability is native and should be explicit, we have to enforce this rule by default.
 
-This means, we would have to adapt the transactions validation and particulary in the interpreter's parsing phase to ensure the action `code_update` is set.
+This means, we would have to adapt the transactions validation and particulary in the interpreter's parsing phase to ensure the action `code_upgrade` is set.
 
 The interpreter should also prevent to have an empty condition to avoid some security issue, because anyone could upgrade any smart contract code.
 ```elixir
 # DO NOT !
-condition triggered_by: transaction, on: code_update(), do: []
-actions triggered_by: transaction, on: code_update(new_code) do
+condition triggered_by: transaction, on: code_upgrade(), do: []
+actions triggered_by: transaction, on: code_upgrade(new_code) do
    Contract.set_code(new_code)
 end
 ```
 
 ## Validation
 
-When the owner of the contract would like to update the code, the user would have to send a transaction with the named action `code_update`.
+When the owner of the contract would like to update the code, the user would have to send a transaction with the named action `code_upgrade`.
 
 The nodes will assert whether the new code is valid and check the smart contract `condition` based on the incoming transaction.
 
